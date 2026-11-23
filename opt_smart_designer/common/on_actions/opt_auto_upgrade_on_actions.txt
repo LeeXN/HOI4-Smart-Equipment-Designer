@@ -1,0 +1,13 @@
+on_actions = {
+    on_monthly = {
+        effect = {
+            every_country = {
+                limit = {
+                    is_ai = no
+                    check_variable = { opt_auto_upgrade = 1 }
+                }
+                opt_run_monthly_auto_upgrade = yes
+            }
+        }
+    }
+}

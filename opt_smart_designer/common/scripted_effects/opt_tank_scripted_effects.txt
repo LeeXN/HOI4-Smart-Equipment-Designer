@@ -1,0 +1,358 @@
+opt_assemble_tank_v4 = {
+    opt_pick_best_radio = yes
+    opt_bump_tank_version = yes
+
+    # ---------- 1. 早战高速轻坦 (Light Tank 1936/1940/1941) ----------
+    if = {
+        limit = { check_variable = { opt_tank_mode = 1 } }
+        if = { limit = { check_variable = { opt_gui_era > 2 } has_tech = advanced_light_tank_chassis } set_variable = { opt_chassis_id = 3 } }
+        else_if = { limit = { check_variable = { opt_gui_era > 1 } has_tech = improved_light_tank_chassis } set_variable = { opt_chassis_id = 2 } }
+        else = { set_variable = { opt_chassis_id = 1 } }
+
+        if = { limit = { has_tech = interwar_artillery } set_variable = { opt_lt_gun = 1 } } # close_support_gun
+        else = { set_variable = { opt_lt_gun = 2 } } # tank_auto_cannon
+
+        meta_effect = {
+            text = {
+                create_equipment_variant = {
+                    name = "[VARIANT_NAME] [VER]"
+                    type = [LT_CHASSIS]
+                    parent_version = [PREV_VER]
+                    modules = {
+                        main_armament_slot = [LT_GUN]
+                        turret_type_slot = tank_light_two_man_tank_turret
+                        suspension_type_slot = tank_christie_suspension
+                        armor_type_slot = tank_riveted_armor
+                        engine_type_slot = tank_gasoline_engine
+                        special_type_slot_1 = [SPEC_1]
+                        special_type_slot_2 = additional_machine_guns
+                        special_type_slot_3 = fuel_drum
+                        special_type_slot_4 = additional_machine_guns
+                    }
+                    upgrades = {
+                        tank_nsb_engine_upgrade = 6
+                        tank_nsb_armor_upgrade = 2
+                    }
+                }
+            }
+            VARIANT_NAME = "[OptGetVariantName]"
+            VER = "[OptGetRomanVer]"
+            PREV_VER = "[?opt_prev_ver|0]"
+            LT_CHASSIS = "[OptGetLightChassis]"
+            LT_GUN = "[OptGetLightGun]"
+            SPEC_1 = "[OptGetSpecial1]"
+        }
+    }
+    # ---------- 2. 主力中坦 (Medium Tank 1938/1940/1943，按年代上限 + 量化打分) ----------
+    else_if = {
+        limit = { check_variable = { opt_tank_mode = 2 } }
+        if = { limit = { check_variable = { opt_gui_era > 2 } has_tech = advanced_medium_tank_chassis } set_variable = { opt_chassis_id = 3 } }
+        else_if = { limit = { check_variable = { opt_gui_era > 1 } has_tech = improved_medium_tank_chassis } set_variable = { opt_chassis_id = 2 } }
+        else = { set_variable = { opt_chassis_id = 1 } }
+
+        # 使用万金油量化打分公式（mode=3 weights）
+        set_variable = { opt_tank_mode = 3 }
+        opt_score_tank_main_gun = yes
+        opt_score_tank_armor = yes
+        opt_score_tank_engine = yes
+        set_variable = { opt_tank_mode = 2 }
+
+        set_variable = { opt_turret_id = 3 }
+        set_variable = { opt_suspension_id = 3 }
+        set_variable = { opt_engine_lvl = 8 }
+        set_variable = { opt_armor_lvl = 8 }
+        if = { limit = { has_tech = armor_tech_3 } set_variable = { opt_special_2_id = 3 } }
+        else_if = { limit = { has_tech = armor_tech_2 } set_variable = { opt_special_2_id = 2 } }
+        else = { set_variable = { opt_special_2_id = 0 } }
+
+        set_variable = { opt_special_3_id = 1 }
+        if = { limit = { check_variable = { opt_gui_theater > 1 } } set_variable = { opt_special_4_id = 2 } }
+        else_if = { limit = { has_tech = tech_engineers2 } set_variable = { opt_special_4_id = 3 } }
+        else = { set_variable = { opt_special_4_id = 1 } }
+
+        if = {
+            limit = { opt_is_mobile_warfare = yes }
+            add_to_variable = { opt_engine_lvl = 2 }
+            subtract_from_variable = { opt_armor_lvl = 1 }
+            set_variable = { opt_suspension_id = 2 }
+        }
+        else_if = {
+            limit = { opt_is_superior_firepower = yes }
+            subtract_from_variable = { opt_engine_lvl = 2 }
+            set_variable = { opt_special_2_id = 4 }
+        }
+        if = { limit = { check_variable = { opt_gui_theater > 1 } } subtract_from_variable = { opt_engine_lvl = 1 } subtract_from_variable = { opt_armor_lvl = 1 } }
+        if = { limit = { opt_has_tank_mio_reliability_bonus = yes check_variable = { opt_special_2_id = 2 } } set_variable = { opt_special_2_id = 5 } }
+
+        clamp_variable = { var = opt_engine_lvl min = 0 max = 14 }
+        clamp_variable = { var = opt_armor_lvl  min = 0 max = 14 }
+
+        meta_effect = {
+            text = {
+                create_equipment_variant = {
+                    name = "[VARIANT_NAME] [VER]"
+                    type = [CHASSIS]
+                    parent_version = [PREV_VER]
+                    modules = {
+                        main_armament_slot = [MAIN_GUN]
+                        turret_type_slot = [TURRET]
+                        suspension_type_slot = [SUSPENSION]
+                        armor_type_slot = [ARMOR]
+                        engine_type_slot = [ENGINE]
+                        special_type_slot_1 = [SPEC_1]
+                        special_type_slot_2 = [SPEC_2]
+                        special_type_slot_3 = [SPEC_3]
+                        special_type_slot_4 = [SPEC_4]
+                    }
+                    upgrades = {
+                        tank_nsb_engine_upgrade = [ENGINE_LVL]
+                        tank_nsb_armor_upgrade = [ARMOR_LVL]
+                    }
+                }
+            }
+            VARIANT_NAME = "[OptGetVariantName]"
+            VER = "[OptGetRomanVer]"
+            PREV_VER = "[?opt_prev_ver|0]"
+            CHASSIS = "[OptGetChassis]"
+            MAIN_GUN = "[OptGetMainGun]"
+            TURRET = "[OptGetTurret]"
+            SUSPENSION = "[OptGetSuspension]"
+            ARMOR = "[OptGetArmor]"
+            ENGINE = "[OptGetEngine]"
+            SPEC_1 = "[OptGetSpecial1]"
+            SPEC_2 = "[OptGetSpecial2]"
+            SPEC_3 = "[OptGetSpecial3]"
+            SPEC_4 = "[OptGetSpecial4]"
+            ENGINE_LVL = "[?opt_engine_lvl|0]"
+            ARMOR_LVL = "[?opt_armor_lvl|0]"
+        }
+    }
+    # ---------- 3. 重装破阵重坦 (Heavy Tank 1936/1940/1943，专配太空步兵高甲) ----------
+    else_if = {
+        limit = { check_variable = { opt_tank_mode = 3 } }
+        if = { limit = { check_variable = { opt_gui_era > 2 } has_tech = advanced_heavy_tank_chassis } set_variable = { opt_chassis_id = 3 } }
+        else_if = { limit = { check_variable = { opt_gui_era > 1 } has_tech = improved_heavy_tank_chassis } set_variable = { opt_chassis_id = 2 } }
+        else = { set_variable = { opt_chassis_id = 1 } }
+
+        # 重坦配高软攻炮 + 高装甲（给步兵提供 4km/h 极致防穿）
+        if = { limit = { has_tech = artillery4 } set_variable = { opt_gun_id = 4 } }
+        else_if = { limit = { has_tech = artillery1 } set_variable = { opt_gun_id = 3 } }
+        else_if = { limit = { has_tech = interwar_artillery } set_variable = { opt_gun_id = 1 } }
+        else = { set_variable = { opt_gun_id = 2 } }
+
+        if = { limit = { has_tech = armor_tech_3 } set_variable = { opt_special_2_id = 3 } } # sloped_armor
+        else = { set_variable = { opt_special_2_id = 4 } } # secondary_turret_hmg
+
+        meta_effect = {
+            text = {
+                create_equipment_variant = {
+                    name = "[VARIANT_NAME] [VER]"
+                    type = [HT_CHASSIS]
+                    parent_version = [PREV_VER]
+                    modules = {
+                        main_armament_slot = [MAIN_GUN]
+                        turret_type_slot = tank_heavy_three_man_tank_turret
+                        suspension_type_slot = tank_torsion_bar_suspension
+                        armor_type_slot = tank_welded_armor
+                        engine_type_slot = tank_diesel_engine
+                        special_type_slot_1 = [SPEC_1]
+                        special_type_slot_2 = [SPEC_2]
+                        special_type_slot_3 = additional_machine_guns
+                        special_type_slot_4 = additional_machine_guns
+                    }
+                    upgrades = {
+                        tank_nsb_engine_upgrade = 4
+                        tank_nsb_armor_upgrade = 12
+                    }
+                }
+            }
+            VARIANT_NAME = "[OptGetVariantName]"
+            VER = "[OptGetRomanVer]"
+            PREV_VER = "[?opt_prev_ver|0]"
+            HT_CHASSIS = "[OptGetHeavyChassis]"
+            MAIN_GUN = "[OptGetMainGun]"
+            SPEC_1 = "[OptGetSpecial1]"
+            SPEC_2 = "[OptGetSpecial2]"
+        }
+    }
+    # ---------- 4. 中坦喷火支援车 (Medium Flame Tank) ----------
+    else_if = {
+        limit = { check_variable = { opt_tank_mode = 4 } }
+        if = { limit = { check_variable = { opt_gui_era > 2 } has_tech = advanced_medium_tank_chassis } set_variable = { opt_chassis_id = 3 } }
+        else_if = { limit = { check_variable = { opt_gui_era > 1 } has_tech = improved_medium_tank_chassis } set_variable = { opt_chassis_id = 2 } }
+        else = { set_variable = { opt_chassis_id = 1 } }
+
+        meta_effect = {
+            text = {
+                create_equipment_variant = {
+                    name = "[VARIANT_NAME] [VER]"
+                    type = [FLAME_CHASSIS]
+                    parent_version = [PREV_VER]
+                    modules = {
+                        main_armament_slot = flamethrower
+                        turret_type_slot = tank_medium_one_man_tank_turret
+                        suspension_type_slot = tank_christie_suspension
+                        armor_type_slot = tank_riveted_armor
+                        engine_type_slot = tank_diesel_engine
+                        special_type_slot_1 = dozer_blade
+                        special_type_slot_2 = fuel_drum
+                        special_type_slot_3 = fuel_drum
+                        special_type_slot_4 = additional_machine_guns
+                    }
+                    upgrades = {
+                        tank_nsb_engine_upgrade = 4
+                        tank_nsb_armor_upgrade = 0
+                    }
+                }
+            }
+            VARIANT_NAME = "[OptGetVariantName]"
+            VER = "[OptGetRomanVer]"
+            PREV_VER = "[?opt_prev_ver|0]"
+            FLAME_CHASSIS = "[OptGetFlameChassis]"
+        }
+    }
+
+    # ---------- 6. 中坦自行火炮 (Medium SPG，极限低价软攻洗地) ----------
+    else_if = {
+        limit = { check_variable = { opt_tank_mode = 6 } }
+        if = { limit = { check_variable = { opt_gui_era > 2 } has_tech = advanced_medium_tank_chassis } set_variable = { opt_chassis_id = 3 } }
+        else_if = { limit = { check_variable = { opt_gui_era > 1 } has_tech = improved_medium_tank_chassis } set_variable = { opt_chassis_id = 2 } }
+        else = { set_variable = { opt_chassis_id = 1 } }
+
+        if = { limit = { has_tech = artillery4 } set_variable = { opt_gun_id = 4 } }
+        else = { set_variable = { opt_gun_id = 3 } }
+
+        meta_effect = {
+            text = {
+                create_equipment_variant = {
+                    name = "[VARIANT_NAME] [VER]"
+                    type = [SPG_CHASSIS]
+                    parent_version = [PREV_VER]
+                    modules = {
+                        main_armament_slot = [MAIN_GUN]
+                        turret_type_slot = tank_medium_fixed_superstructure_turret
+                        suspension_type_slot = tank_christie_suspension
+                        armor_type_slot = tank_riveted_armor
+                        engine_type_slot = tank_diesel_engine
+                        special_type_slot_1 = [SPEC_1]
+                        special_type_slot_2 = extra_ammo_storage
+                        special_type_slot_3 = additional_machine_guns
+                        special_type_slot_4 = additional_machine_guns
+                    }
+                    upgrades = {
+                        tank_nsb_engine_upgrade = 6
+                        tank_nsb_armor_upgrade = 2
+                    }
+                }
+            }
+            VARIANT_NAME = "[OptGetVariantName]"
+            VER = "[OptGetRomanVer]"
+            PREV_VER = "[?opt_prev_ver|0]"
+            SPG_CHASSIS = "[OptGetSPGChassis]"
+            MAIN_GUN = "[OptGetMainGun]"
+            SPEC_1 = "[OptGetSpecial1]"
+        }
+    }
+    # ---------- 7. 现代主战坦克 (1945 Modern Tank Chassis) ----------
+    else_if = {
+        limit = { check_variable = { opt_tank_mode = 7 } }
+        if = { limit = { has_tech = artillery4 } set_variable = { opt_gun_id = 4 } }
+        else_if = { limit = { has_tech = artillery1 } set_variable = { opt_gun_id = 3 } }
+        else = { set_variable = { opt_gun_id = 2 } }
+        if = { limit = { has_tech = armor_tech_3 } set_variable = { opt_special_2_id = 3 } }
+        else = { set_variable = { opt_special_2_id = 5 } }
+
+        meta_effect = {
+            text = {
+                create_equipment_variant = {
+                    name = "[VARIANT_NAME] [VER]"
+                    type = modern_tank_chassis_1
+                    parent_version = [PREV_VER]
+                    modules = {
+                        main_armament_slot = [MAIN_GUN]
+                        turret_type_slot = tank_modern_tank_turret
+                        suspension_type_slot = tank_torsion_bar_suspension
+                        armor_type_slot = tank_welded_armor
+                        engine_type_slot = tank_gasoline_engine
+                        special_type_slot_1 = [SPEC_1]
+                        special_type_slot_2 = [SPEC_2]
+                        special_type_slot_3 = additional_machine_guns
+                        special_type_slot_4 = fuel_drum
+                    }
+                    upgrades = {
+                        tank_nsb_engine_upgrade = 12
+                        tank_nsb_armor_upgrade = 12
+                    }
+                }
+            }
+            VARIANT_NAME = "[OptGetVariantName]"
+            VER = "[OptGetRomanVer]"
+            PREV_VER = "[?opt_prev_ver|0]"
+            MAIN_GUN = "[OptGetMainGun]"
+            SPEC_1 = "[OptGetSpecial1]"
+            SPEC_2 = "[OptGetSpecial2]"
+        }
+    }
+    # ---------- 5. 装甲侦察轻坦 ----------
+    else = {
+        if = { limit = { check_variable = { opt_gui_era > 2 } has_tech = advanced_light_tank_chassis } set_variable = { opt_chassis_id = 3 } }
+        else_if = { limit = { check_variable = { opt_gui_era > 1 } has_tech = improved_light_tank_chassis } set_variable = { opt_chassis_id = 2 } }
+        else = { set_variable = { opt_chassis_id = 1 } }
+        if = { limit = { has_tech = interwar_artillery } set_variable = { opt_lt_gun = 1 } }
+        else = { set_variable = { opt_lt_gun = 2 } }
+
+        meta_effect = {
+            text = {
+                create_equipment_variant = {
+                    name = "[VARIANT_NAME] [VER]"
+                    type = [LT_CHASSIS]
+                    parent_version = [PREV_VER]
+                    modules = {
+                        main_armament_slot = [LT_GUN]
+                        turret_type_slot = tank_light_one_man_tank_turret
+                        suspension_type_slot = tank_christie_suspension
+                        armor_type_slot = tank_riveted_armor
+                        engine_type_slot = tank_gasoline_engine
+                        special_type_slot_1 = fuel_drum
+                        special_type_slot_2 = fuel_drum
+                        special_type_slot_3 = additional_machine_guns
+                        special_type_slot_4 = additional_machine_guns
+                    }
+                    upgrades = {
+                        tank_nsb_engine_upgrade = 6
+                        tank_nsb_armor_upgrade = 0
+                    }
+                }
+            }
+            VARIANT_NAME = "[OptGetVariantName]"
+            VER = "[OptGetRomanVer]"
+            PREV_VER = "[?opt_prev_ver|0]"
+            LT_CHASSIS = "[OptGetLightChassis]"
+            LT_GUN = "[OptGetLightGun]"
+        }
+    }
+
+    clear_variable = opt_tank_mode
+    clear_variable = opt_chassis_id
+    clear_variable = opt_gun_id
+    clear_variable = opt_lt_gun
+    clear_variable = opt_turret_id
+    clear_variable = opt_suspension_id
+    clear_variable = opt_armor_id
+    clear_variable = opt_engine_id
+    clear_variable = opt_special_1_id
+    clear_variable = opt_special_2_id
+    clear_variable = opt_special_3_id
+    clear_variable = opt_special_4_id
+    clear_variable = opt_engine_lvl
+    clear_variable = opt_armor_lvl
+    clear_variable = opt_cur_ver
+    clear_variable = opt_prev_ver
+}
+
+opt_pick_best_radio = {
+    if = { limit = { has_tech = improved_radio } set_variable = { opt_special_1_id = 3 } }
+    else_if = { limit = { has_tech = radio_detection } set_variable = { opt_special_1_id = 2 } }
+    else_if = { limit = { has_tech = radio } set_variable = { opt_special_1_id = 1 } }
+    else = { set_variable = { opt_special_1_id = 0 } }
+}

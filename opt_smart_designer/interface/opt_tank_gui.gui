@@ -1,0 +1,100 @@
+guiTypes = {
+
+    containerWindowType = {
+        name = "opt_tank_topbar_toggle_window"
+        orientation = upper_right
+        position = { x = -540 y = 4 }
+        size = { width = 224 height = 38 }
+        moveable = yes
+
+        buttonType = {
+            name = "opt_topbar_open_btn"
+            position = { x = 0 y = 0 }
+            quadTextureSprite = "GFX_button_221x34"
+            buttonText = "opt_topbar_open_btn_text"
+            buttonFont = "hoi_20bs"
+            pdx_tooltip = "opt_topbar_open_btn_tt"
+        }
+    }
+
+    containerWindowType = {
+        name = "opt_tank_main_panel_window"
+        position = { x = 0 y = 0 }
+        size = { width = 640 height = 600 }
+        orientation = center
+        origo = center
+        moveable = yes
+        fade_time = 200
+        fade_type = linear
+
+        background = {
+            name = "Background"
+            quadTextureSprite = "GFX_tiled_bg"
+        }
+
+        instantTextboxType = {
+            name = "opt_panel_title"
+            position = { x = 22 y = 14 }
+            font = "hoi_24header"
+            text = "opt_gui_panel_title"
+            maxWidth = 310
+            maxHeight = 30
+            format = left
+        }
+
+        buttonType = { name = "opt_era_btn"     position = { x = 336 y = 10 } quadTextureSprite = "GFX_button_123x34" buttonText = "opt_era_btn_loc"     buttonFont = "hoi_16mbs" pdx_tooltip = "opt_era_btn_tt" }
+        buttonType = { name = "opt_theater_btn" position = { x = 464 y = 10 } quadTextureSprite = "GFX_button_123x34" buttonText = "opt_theater_btn_loc" buttonFont = "hoi_16mbs" pdx_tooltip = "opt_theater_btn_tt" }
+        buttonType = { name = "opt_close_btn"   position = { x = 596 y = 10 } quadTextureSprite = "GFX_closebutton" shortcut = "ESCAPE" }
+
+        # 顶部 5 大页签
+        buttonType = { name = "opt_tab_1_btn" position = { x = 25 y = 50 }  quadTextureSprite = "GFX_button_94x31" buttonText = "opt_tab_1_btn_loc" buttonFont = "hoi_16mbs" }
+        buttonType = { name = "opt_tab_2_btn" position = { x = 149 y = 50 } quadTextureSprite = "GFX_button_94x31" buttonText = "opt_tab_2_btn_loc" buttonFont = "hoi_16mbs" }
+        buttonType = { name = "opt_tab_3_btn" position = { x = 273 y = 50 } quadTextureSprite = "GFX_button_94x31" buttonText = "opt_tab_3_btn_loc" buttonFont = "hoi_16mbs" }
+        buttonType = { name = "opt_tab_4_btn" position = { x = 397 y = 50 } quadTextureSprite = "GFX_button_94x31" buttonText = "opt_tab_4_btn_loc" buttonFont = "hoi_16mbs" }
+        buttonType = { name = "opt_tab_5_btn" position = { x = 521 y = 50 } quadTextureSprite = "GFX_button_94x31" buttonText = "opt_tab_5_btn_loc" buttonFont = "hoi_16mbs" }
+
+        # 兵种预设第一排（1~4，宽按钮 123x34）
+        buttonType = { name = "opt_mode_1_btn" position = { x = 25 y = 88 }  quadTextureSprite = "GFX_button_123x34" buttonText = "opt_mode_1_btn_loc" buttonFont = "hoi_16mbs" }
+        buttonType = { name = "opt_mode_2_btn" position = { x = 174 y = 88 } quadTextureSprite = "GFX_button_123x34" buttonText = "opt_mode_2_btn_loc" buttonFont = "hoi_16mbs" }
+        buttonType = { name = "opt_mode_3_btn" position = { x = 323 y = 88 } quadTextureSprite = "GFX_button_123x34" buttonText = "opt_mode_3_btn_loc" buttonFont = "hoi_16mbs" }
+        buttonType = { name = "opt_mode_4_btn" position = { x = 472 y = 88 } quadTextureSprite = "GFX_button_123x34" buttonText = "opt_mode_4_btn_loc" buttonFont = "hoi_16mbs" }
+
+        # 兵种预设第二排（5~8，宽按钮 123x34，按页签自动显隐）
+        buttonType = { name = "opt_mode_5_btn" position = { x = 25 y = 128 }  quadTextureSprite = "GFX_button_123x34" buttonText = "opt_mode_5_btn_loc" buttonFont = "hoi_16mbs" }
+        buttonType = { name = "opt_mode_6_btn" position = { x = 174 y = 128 } quadTextureSprite = "GFX_button_123x34" buttonText = "opt_mode_6_btn_loc" buttonFont = "hoi_16mbs" }
+        buttonType = { name = "opt_mode_7_btn" position = { x = 323 y = 128 } quadTextureSprite = "GFX_button_123x34" buttonText = "opt_mode_7_btn_loc" buttonFont = "hoi_16mbs" }
+        buttonType = { name = "opt_mode_8_btn" position = { x = 472 y = 128 } quadTextureSprite = "GFX_button_123x34" buttonText = "opt_mode_8_btn_loc" buttonFont = "hoi_16mbs" }
+
+        # 实时诊断与缺失科技清单
+        instantTextboxType = {
+            name = "opt_reason_box"
+            position = { x = 26 y = 172 }
+            font = "hoi_18mbs"
+            text = "opt_reason_box_loc"
+            maxWidth = 588
+            maxHeight = 356
+            format = left
+            scrollbartype = "standardtext_slider"
+        }
+
+        # 底部左侧：按月自动更新开关按钮
+        buttonType = {
+            name = "opt_auto_upgrade_btn"
+            position = { x = 44 y = 542 }
+            quadTextureSprite = "GFX_button_123x34"
+            buttonText = "opt_auto_upgrade_btn_loc"
+            buttonFont = "hoi_16mbs"
+            pdx_tooltip = "opt_auto_upgrade_btn_tt"
+        }
+
+        # 底部主按钮：一键生成/刷新
+        buttonType = {
+            name = "opt_generate_btn"
+            position = { x = 209 y = 542 }
+            quadTextureSprite = "GFX_button_221x34"
+            buttonText = "opt_generate_btn_loc"
+            buttonFont = "hoi_18mbs"
+            pdx_tooltip = "opt_gui_generate_btn_tt"
+        }
+    }
+}

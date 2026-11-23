@@ -1,0 +1,197 @@
+# ==================================================
+# 纯单人模块性价比量化打分引擎（基于原版真实数值公式）
+# ==================================================
+
+# 1. 坦克主炮量化打分：单人核心公式 = (软攻 * 软攻权重 + 突破 * 突破权重) / 造价 - 资源惩罚
+opt_score_tank_main_gun = {
+    # 按预设设定权重（1=最便宜, 2=最快, 3=万金油）
+    if = {
+        limit = { check_variable = { opt_tank_mode = 1 } }
+        set_temp_variable = { w_sa = 1.0 }
+        set_temp_variable = { w_ic_pow = 2.0 } # 极度看重低造价
+    }
+    else_if = {
+        limit = { check_variable = { opt_tank_mode = 2 } }
+        set_temp_variable = { w_sa = 1.2 }
+        set_temp_variable = { w_ic_pow = 1.1 }
+    }
+    else = {
+        set_temp_variable = { w_sa = 1.6 }     # 万金油强推软攻
+        set_temp_variable = { w_ic_pow = 0.8 }
+    }
+
+    # 优势火力学说进一步抬高软攻权重
+    if = {
+        limit = { opt_is_superior_firepower = yes }
+        multiply_temp_variable = { w_sa = 1.25 }
+    }
+
+    # 钨矿惩罚（中坦榴弹炮/中炮耗钨，缺钨时扣分）
+    set_temp_variable = { tungsten_pen = 0 }
+    if = {
+        limit = { NOT = { has_resources_in_country = { resource = tungsten amount > 10 } } }
+        set_temp_variable = { tungsten_pen = 6 }
+    }
+
+    set_variable = { opt_gun_id = 2 } # 兜底：中坦炮 (SA 20, IC 3.0)
+    set_temp_variable = { best_gun_score = 0 }
+
+    # 候选 A：中坦炮 tank_medium_cannon (id=2, SA=20, IC=3.0)
+    set_temp_variable = { s = 20 }
+    multiply_temp_variable = { s = w_sa }
+    set_temp_variable = { denom = 3.0 }
+    multiply_temp_variable = { denom = w_ic_pow }
+    divide_temp_variable = { s = denom }
+    subtract_from_temp_variable = { s = tungsten_pen }
+    set_temp_variable = { best_gun_score = s }
+
+    # 候选 B：近距支援炮 tank_close_support_gun (id=1, SA=25, IC=2.0, 不耗钨!)
+    if = {
+        limit = { has_tech = interwar_artillery }
+        set_temp_variable = { s = 25 }
+        multiply_temp_variable = { s = w_sa }
+        set_temp_variable = { denom = 2.0 }
+        multiply_temp_variable = { denom = w_ic_pow }
+        divide_temp_variable = { s = denom }
+        if = {
+            limit = { check_variable = { s > best_gun_score } }
+            set_temp_variable = { best_gun_score = s }
+            set_variable = { opt_gun_id = 1 }
+        }
+    }
+
+    # 候选 C：中坦榴弹炮 I tank_medium_howitzer (id=3, SA=35, IC=4.0)
+    if = {
+        limit = { has_tech = artillery1 }
+        set_temp_variable = { s = 35 }
+        multiply_temp_variable = { s = w_sa }
+        set_temp_variable = { denom = 4.0 }
+        multiply_temp_variable = { denom = w_ic_pow }
+        divide_temp_variable = { s = denom }
+        subtract_from_temp_variable = { s = tungsten_pen }
+        if = {
+            limit = { check_variable = { s > best_gun_score } }
+            set_temp_variable = { best_gun_score = s }
+            set_variable = { opt_gun_id = 3 }
+        }
+    }
+
+    # 候选 D：中坦榴弹炮 II tank_medium_howitzer_2 (id=4, SA=45, IC=5.5)
+    if = {
+        limit = { has_tech = artillery4 }
+        set_temp_variable = { s = 45 }
+        multiply_temp_variable = { s = w_sa }
+        set_temp_variable = { denom = 5.5 }
+        multiply_temp_variable = { denom = w_ic_pow }
+        divide_temp_variable = { s = denom }
+        subtract_from_temp_variable = { s = tungsten_pen }
+        if = {
+            limit = { check_variable = { s > best_gun_score } }
+            set_temp_variable = { best_gun_score = s }
+            set_variable = { opt_gun_id = 4 }
+        }
+    }
+}
+
+# 2. 坦克装甲量化打分（铆接 id=1 vs 焊接 id=2）
+opt_score_tank_armor = {
+    # 铆接：低 IC，不耗铬；焊接：高装甲系数，耗铬
+    set_temp_variable = { score_riveted = 10 }
+    set_temp_variable = { score_welded  = 8 }
+
+    if = {
+        limit = { check_variable = { opt_tank_mode = 3 } }
+        add_to_temp_variable = { score_welded = 12 } # 万金油看重防穿甲
+    }
+    if = {
+        limit = { has_resources_in_country = { resource = chromium amount > 15 } }
+        add_to_temp_variable = { score_welded = 6 }
+    }
+    else = {
+        subtract_from_temp_variable = { score_welded = 15 } # 缺铬重罚
+    }
+
+    if = {
+        limit = { check_variable = { score_welded > score_riveted } }
+        set_variable = { opt_armor_id = 2 } # welded
+    }
+    else = {
+        set_variable = { opt_armor_id = 1 } # riveted
+    }
+}
+
+# 3. 坦克引擎量化打分（汽油机 id=1 vs 柴油机 id=2）
+opt_score_tank_engine = {
+    set_temp_variable = { score_gas    = 10 }
+    set_temp_variable = { score_diesel = 10 }
+
+    if = { limit = { check_variable = { opt_tank_mode = 1 } } add_to_temp_variable = { score_diesel = 10 } }
+    if = { limit = { check_variable = { opt_tank_mode = 2 } } add_to_temp_variable = { score_gas = 15 } }
+    if = { limit = { opt_is_mobile_warfare = yes }            add_to_temp_variable = { score_gas = 8 } }
+    if = { limit = { opt_has_tank_mio_reliability_bonus = yes } add_to_temp_variable = { score_gas = 10 } }
+    # 远距/烂补给战区优先可靠性
+    if = { limit = { check_variable = { opt_gui_theater = 2 } } add_to_temp_variable = { score_diesel = 8 } }
+    if = { limit = { check_variable = { opt_gui_theater = 3 } } add_to_temp_variable = { score_diesel = 20 } }
+
+    if = {
+        limit = { check_variable = { score_gas > score_diesel } }
+        set_variable = { opt_engine_id = 1 }
+    }
+    else = {
+        set_variable = { opt_engine_id = 2 }
+    }
+}
+
+# 4. 飞机生存/航程模块量化打分（写入 opt_plane_spec1_id）
+opt_score_plane_spec1 = {
+    # 1=自封油箱(高防,耗橡胶), 2=装甲板(高防,重,不耗胶), 3=副油箱(高航程,轻), 0=空
+    set_temp_variable = { s_sealing = 0 }
+    set_temp_variable = { s_armor   = 0 }
+    set_temp_variable = { s_droptnk = 0 }
+
+    if = {
+        limit = { has_tech = survivability_studies }
+        set_temp_variable = { s_sealing = 28 }
+        set_temp_variable = { s_armor   = 20 }
+        # 橡胶充足加分，缺胶重罚自封油箱
+        if = {
+            limit = { has_resources_in_country = { resource = rubber amount > 15 } }
+            add_to_temp_variable = { s_sealing = 10 }
+        }
+        else = {
+            subtract_from_temp_variable = { s_sealing = 30 }
+        }
+        # 推力不足惩罚重装甲板
+        if = {
+            limit = { check_variable = { opt_plane_engine_id < 3 } }
+            subtract_from_temp_variable = { s_armor = 18 }
+        }
+    }
+
+    if = {
+        limit = { has_tech = range_improvements }
+        set_temp_variable = { s_droptnk = 18 }
+        # 远洋/东线大空区：航程权重暴涨，强制优先副油箱
+        if = { limit = { check_variable = { opt_gui_theater = 2 } } add_to_temp_variable = { s_droptnk = 15 } }
+        else_if = { limit = { check_variable = { opt_gui_theater = 3 } } add_to_temp_variable = { s_droptnk = 20 } }
+        else_if = { limit = { check_variable = { opt_gui_theater = 4 } } add_to_temp_variable = { s_droptnk = 32 } }
+    }
+
+    set_variable = { opt_plane_spec1_id = 0 }
+    set_temp_variable = { best_s = 1 }
+    if = {
+        limit = { check_variable = { s_sealing > best_s } }
+        set_temp_variable = { best_s = s_sealing }
+        set_variable = { opt_plane_spec1_id = 1 }
+    }
+    if = {
+        limit = { check_variable = { s_armor > best_s } }
+        set_temp_variable = { best_s = s_armor }
+        set_variable = { opt_plane_spec1_id = 2 }
+    }
+    if = {
+        limit = { check_variable = { s_droptnk > best_s } }
+        set_temp_variable = { best_s = s_droptnk }
+        set_variable = { opt_plane_spec1_id = 3 }
+    }
+}

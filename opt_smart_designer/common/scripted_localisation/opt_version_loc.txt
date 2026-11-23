@@ -1,0 +1,10 @@
+defined_text = {
+    name = OptGetRomanVer
+    text = { trigger = { check_variable = { opt_cur_ver = 1 } } localization_key = opt_ver_mk_1 }
+    text = { trigger = { check_variable = { opt_cur_ver = 2 } } localization_key = opt_ver_mk_2 }
+    text = { trigger = { check_variable = { opt_cur_ver = 3 } } localization_key = opt_ver_mk_3 }
+    text = { trigger = { check_variable = { opt_cur_ver = 4 } } localization_key = opt_ver_mk_4 }
+    text = { trigger = { check_variable = { opt_cur_ver = 5 } } localization_key = opt_ver_mk_5 }
+    text = { trigger = { check_variable = { opt_cur_ver = 6 } } localization_key = opt_ver_mk_6 }
+    text = { localization_key = opt_ver_mk_num }
+}

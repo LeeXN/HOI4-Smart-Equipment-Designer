@@ -1,0 +1,235 @@
+defined_text = {
+    name = OptShipGetName
+    text = { trigger = { check_variable = { opt_ship_mode = 1 } } localization_key = opt_ship_name_dd }
+    text = { trigger = { check_variable = { opt_ship_mode = 2 } } localization_key = opt_ship_name_dd_torp }
+    text = { trigger = { check_variable = { opt_ship_mode = 3 } } localization_key = opt_ship_name_cl }
+    text = { trigger = { check_variable = { opt_ship_mode = 4 } } localization_key = opt_ship_name_sub }
+    text = { trigger = { check_variable = { opt_ship_mode = 5 } } localization_key = opt_ship_name_bb }
+    text = { localization_key = opt_ship_name_cv }
+}
+defined_text = {
+    name = OptShipGetDDTorp
+    text = { trigger = { check_variable = { opt_dd_torp_lvl = 4 } } localization_key = opt_key_ship_torpedo_4 }
+    text = { trigger = { check_variable = { opt_dd_torp_lvl = 3 } } localization_key = opt_key_ship_torpedo_3 }
+    text = { trigger = { check_variable = { opt_dd_torp_lvl = 2 } } localization_key = opt_key_ship_torpedo_2 }
+    text = { localization_key = opt_key_ship_torpedo_1 }
+}
+defined_text = {
+    name = OptShipGetDDHull
+    text = { trigger = { check_variable = { opt_ship_hull_tier = 4 } } localization_key = opt_key_ship_hull_light_4 }
+    text = { trigger = { check_variable = { opt_ship_hull_tier = 3 } } localization_key = opt_key_ship_hull_light_3 }
+    text = { trigger = { check_variable = { opt_ship_hull_tier = 2 } } localization_key = opt_key_ship_hull_light_2 }
+    text = { localization_key = opt_key_ship_hull_light_1 }
+}
+defined_text = {
+    name = OptShipGetDDEngine
+    text = { trigger = { check_variable = { opt_ship_hull_tier = 4 } } localization_key = opt_key_light_ship_engine_4 }
+    text = { trigger = { check_variable = { opt_ship_hull_tier = 3 } } localization_key = opt_key_light_ship_engine_3 }
+    text = { trigger = { check_variable = { opt_ship_hull_tier = 2 } } localization_key = opt_key_light_ship_engine_2 }
+    text = { localization_key = opt_key_light_ship_engine_1 }
+}
+defined_text = {
+    name = OptShipGetSonar
+    text = { trigger = { check_variable = { opt_ship_sonar_lvl = 2 } } localization_key = opt_key_ship_sonar_2 }
+    text = { trigger = { check_variable = { opt_ship_sonar_lvl = 1 } } localization_key = opt_key_ship_sonar_1 }
+    text = { localization_key = opt_key_empty }
+}
+defined_text = {
+    name = OptShipGetDepthCharge
+    text = { trigger = { check_variable = { opt_ship_dc_lvl = 4 } } localization_key = opt_key_ship_depth_charge_4 }
+    text = { trigger = { check_variable = { opt_ship_dc_lvl = 3 } } localization_key = opt_key_ship_depth_charge_3 }
+    text = { trigger = { check_variable = { opt_ship_dc_lvl = 2 } } localization_key = opt_key_ship_depth_charge_2 }
+    text = { localization_key = opt_key_ship_depth_charge_1 }
+}
+defined_text = {
+    name = OptShipGetCLHull
+    text = { trigger = { check_variable = { opt_ship_hull_tier = 4 } } localization_key = opt_key_ship_hull_cruiser_4 }
+    text = { trigger = { check_variable = { opt_ship_hull_tier = 3 } } localization_key = opt_key_ship_hull_cruiser_3 }
+    text = { trigger = { check_variable = { opt_ship_hull_tier = 2 } } localization_key = opt_key_ship_hull_cruiser_2 }
+    text = { localization_key = opt_key_ship_hull_cruiser_1 }
+}
+defined_text = {
+    name = OptShipGetCLEngine
+    text = { trigger = { check_variable = { opt_ship_hull_tier = 4 } } localization_key = opt_key_cruiser_ship_engine_4 }
+    text = { trigger = { check_variable = { opt_ship_hull_tier = 3 } } localization_key = opt_key_cruiser_ship_engine_3 }
+    text = { trigger = { check_variable = { opt_ship_hull_tier = 2 } } localization_key = opt_key_cruiser_ship_engine_2 }
+    text = { localization_key = opt_key_cruiser_ship_engine_1 }
+}
+defined_text = {
+    name = OptShipGetCLGun
+    text = { trigger = { check_variable = { opt_cl_gun_lvl = 4 } } localization_key = opt_key_ship_light_medium_battery_4 }
+    text = { trigger = { check_variable = { opt_cl_gun_lvl = 3 } } localization_key = opt_key_ship_light_medium_battery_3 }
+    text = { trigger = { check_variable = { opt_cl_gun_lvl = 2 } } localization_key = opt_key_ship_light_medium_battery_2 }
+    text = { localization_key = opt_key_ship_light_medium_battery_1 }
+}
+defined_text = {
+    name = OptShipGetCLArmor
+    text = { trigger = { check_variable = { opt_cl_armor_lvl = 3 } } localization_key = opt_key_ship_armor_cruiser_3 }
+    text = { trigger = { check_variable = { opt_cl_armor_lvl = 2 } } localization_key = opt_key_ship_armor_cruiser_2 }
+    text = { localization_key = opt_key_ship_armor_cruiser_1 }
+}
+defined_text = {
+    name = OptShipGetCLMid2Line
+    text = { trigger = { check_variable = { opt_ship_hull_tier > 1 } check_variable = { opt_cl_gun_lvl = 4 } } localization_key = opt_line_cl_mid2_gun4 }
+    text = { trigger = { check_variable = { opt_ship_hull_tier > 1 } check_variable = { opt_cl_gun_lvl = 3 } } localization_key = opt_line_cl_mid2_gun3 }
+    text = { trigger = { check_variable = { opt_ship_hull_tier > 1 } check_variable = { opt_cl_gun_lvl = 2 } } localization_key = opt_line_cl_mid2_gun2 }
+    text = { trigger = { check_variable = { opt_ship_hull_tier > 1 } } localization_key = opt_line_cl_mid2_gun1 }
+    text = { localization_key = opt_sup_blank }
+}
+defined_text = {
+    name = OptShipGetCLFront1Line
+    text = { trigger = { check_variable = { opt_ship_hull_tier > 2 } check_variable = { opt_cl_gun_lvl = 4 } } localization_key = opt_line_cl_front1_gun4 }
+    text = { trigger = { check_variable = { opt_ship_hull_tier > 2 } check_variable = { opt_cl_gun_lvl = 3 } } localization_key = opt_line_cl_front1_gun3 }
+    text = { trigger = { check_variable = { opt_ship_hull_tier > 2 } check_variable = { opt_cl_gun_lvl = 2 } } localization_key = opt_line_cl_front1_gun2 }
+    text = { trigger = { check_variable = { opt_ship_hull_tier > 2 } } localization_key = opt_line_cl_front1_gun1 }
+    text = { localization_key = opt_sup_blank }
+}
+defined_text = {
+    name = OptShipGetSubHull
+    text = { trigger = { check_variable = { opt_ship_hull_tier = 4 } } localization_key = opt_key_ship_hull_submarine_4 }
+    text = { trigger = { check_variable = { opt_ship_hull_tier = 3 } } localization_key = opt_key_ship_hull_submarine_3 }
+    text = { trigger = { check_variable = { opt_ship_hull_tier = 2 } } localization_key = opt_key_ship_hull_submarine_2 }
+    text = { localization_key = opt_key_ship_hull_submarine_1 }
+}
+defined_text = {
+    name = OptShipGetSubEngine
+    text = { trigger = { check_variable = { opt_ship_hull_tier = 4 } } localization_key = opt_key_sub_ship_engine_4 }
+    text = { trigger = { check_variable = { opt_ship_hull_tier = 3 } } localization_key = opt_key_sub_ship_engine_3 }
+    text = { trigger = { check_variable = { opt_ship_hull_tier = 2 } } localization_key = opt_key_sub_ship_engine_2 }
+    text = { localization_key = opt_key_sub_ship_engine_1 }
+}
+defined_text = {
+    name = OptShipGetSubTorp
+    text = { trigger = { check_variable = { opt_sub_torp_lvl = 4 } } localization_key = opt_key_ship_torpedo_sub_4 }
+    text = { trigger = { check_variable = { opt_sub_torp_lvl = 3 } } localization_key = opt_key_ship_torpedo_sub_3 }
+    text = { trigger = { check_variable = { opt_sub_torp_lvl = 2 } } localization_key = opt_key_ship_torpedo_sub_2 }
+    text = { localization_key = opt_key_ship_torpedo_sub_1 }
+}
+defined_text = {
+    name = OptShipGetSubRearLine
+    text = { trigger = { check_variable = { opt_ship_hull_tier > 1 } check_variable = { opt_sub_torp_lvl = 4 } } localization_key = opt_line_sub_rear_torp4 }
+    text = { trigger = { check_variable = { opt_ship_hull_tier > 1 } check_variable = { opt_sub_torp_lvl = 3 } } localization_key = opt_line_sub_rear_torp3 }
+    text = { trigger = { check_variable = { opt_ship_hull_tier > 1 } check_variable = { opt_sub_torp_lvl = 2 } } localization_key = opt_line_sub_rear_torp2 }
+    text = { trigger = { check_variable = { opt_ship_hull_tier > 1 } } localization_key = opt_line_sub_rear_torp1 }
+    text = { localization_key = opt_sup_blank }
+}
+defined_text = {
+    name = OptShipGetSubFrontLine
+    text = { trigger = { check_variable = { opt_ship_hull_tier > 3 } check_variable = { opt_sub_torp_lvl = 4 } } localization_key = opt_line_sub_front_torp4 }
+    text = { trigger = { check_variable = { opt_ship_hull_tier > 3 } check_variable = { opt_sub_torp_lvl = 3 } } localization_key = opt_line_sub_front_torp3 }
+    text = { trigger = { check_variable = { opt_ship_hull_tier > 3 } } localization_key = opt_line_sub_front_torp2 }
+    text = { localization_key = opt_sup_blank }
+}
+defined_text = {
+    name = OptShipGetSubSnorkelLine
+    text = { trigger = { check_variable = { opt_ship_hull_tier > 2 } check_variable = { opt_sub_snorkel_lvl = 2 } } localization_key = opt_line_sub_snorkel2 }
+    text = { trigger = { check_variable = { opt_ship_hull_tier > 2 } check_variable = { opt_sub_snorkel_lvl = 1 } } localization_key = opt_line_sub_snorkel1 }
+    text = { localization_key = opt_sup_blank }
+}
+
+# 战列舰映射
+defined_text = {
+    name = OptShipGetBBHull
+    text = { trigger = { check_variable = { opt_ship_hull_tier = 4 } } localization_key = opt_key_ship_hull_heavy_4 }
+    text = { trigger = { check_variable = { opt_ship_hull_tier = 3 } } localization_key = opt_key_ship_hull_heavy_3 }
+    text = { trigger = { check_variable = { opt_ship_hull_tier = 2 } } localization_key = opt_key_ship_hull_heavy_2 }
+    text = { localization_key = opt_key_ship_hull_heavy_1 }
+}
+defined_text = {
+    name = OptShipGetBBEngine
+    text = { trigger = { check_variable = { opt_ship_hull_tier = 4 } } localization_key = opt_key_heavy_ship_engine_4 }
+    text = { trigger = { check_variable = { opt_ship_hull_tier = 3 } } localization_key = opt_key_heavy_ship_engine_3 }
+    text = { trigger = { check_variable = { opt_ship_hull_tier = 2 } } localization_key = opt_key_heavy_ship_engine_2 }
+    text = { localization_key = opt_key_heavy_ship_engine_1 }
+}
+defined_text = {
+    name = OptShipGetBBGun
+    text = { trigger = { check_variable = { opt_bb_gun_lvl = 4 } } localization_key = opt_key_ship_heavy_battery_4 }
+    text = { trigger = { check_variable = { opt_bb_gun_lvl = 3 } } localization_key = opt_key_ship_heavy_battery_3 }
+    text = { trigger = { check_variable = { opt_bb_gun_lvl = 2 } } localization_key = opt_key_ship_heavy_battery_2 }
+    text = { localization_key = opt_key_ship_heavy_battery_1 }
+}
+defined_text = {
+    name = OptShipGetBBArmor
+    text = { trigger = { check_variable = { opt_bb_armor_lvl = 3 } } localization_key = opt_key_ship_armor_bb_3 }
+    text = { trigger = { check_variable = { opt_bb_armor_lvl = 2 } } localization_key = opt_key_ship_armor_bb_2 }
+    text = { localization_key = opt_key_ship_armor_bb_1 }
+}
+defined_text = {
+    name = OptShipGetSec
+    text = { trigger = { check_variable = { opt_ship_sec_lvl = 3 } } localization_key = opt_key_dp_ship_secondaries_1 }
+    text = { trigger = { check_variable = { opt_ship_sec_lvl = 2 } } localization_key = opt_key_ship_secondaries_2 }
+    text = { localization_key = opt_key_ship_secondaries_1 }
+}
+
+# 航空母舰映射
+defined_text = {
+    name = OptShipGetCVHull
+    text = { trigger = { check_variable = { opt_ship_hull_tier = 3 } } localization_key = opt_key_ship_hull_carrier_3 }
+    text = { trigger = { check_variable = { opt_ship_hull_tier = 2 } } localization_key = opt_key_ship_hull_carrier_2 }
+    text = { localization_key = opt_key_ship_hull_carrier_1 }
+}
+defined_text = {
+    name = OptShipGetCVEngine
+    text = { trigger = { check_variable = { opt_ship_hull_tier = 3 } } localization_key = opt_key_carrier_ship_engine_3 }
+    text = { trigger = { check_variable = { opt_ship_hull_tier = 2 } } localization_key = opt_key_carrier_ship_engine_2 }
+    text = { localization_key = opt_key_carrier_ship_engine_1 }
+}
+defined_text = {
+    name = OptShipGetCVMid1Line
+    text = { trigger = { check_variable = { opt_ship_hull_tier > 1 } } localization_key = opt_line_cv_mid1_deck }
+    text = { localization_key = opt_sup_blank }
+}
+
+# 通用
+defined_text = {
+    name = OptShipGetAA
+    text = { trigger = { check_variable = { opt_ship_aa_lvl = 3 } } localization_key = opt_key_ship_anti_air_3 }
+    text = { trigger = { check_variable = { opt_ship_aa_lvl = 2 } } localization_key = opt_key_ship_anti_air_2 }
+    text = { localization_key = opt_key_ship_anti_air_1 }
+}
+defined_text = {
+    name = OptShipGetFCS
+    text = { trigger = { check_variable = { opt_ship_fcs_lvl = 3 } } localization_key = opt_key_ship_fire_control_system_3 }
+    text = { trigger = { check_variable = { opt_ship_fcs_lvl = 2 } } localization_key = opt_key_ship_fire_control_system_2 }
+    text = { trigger = { check_variable = { opt_ship_fcs_lvl = 1 } } localization_key = opt_key_ship_fire_control_system_1 }
+    text = { localization_key = opt_key_ship_fire_control_system_0 }
+}
+defined_text = {
+    name = OptShipGetRadar
+    text = { trigger = { check_variable = { opt_ship_radar_lvl = 3 } } localization_key = opt_key_ship_radar_3 }
+    text = { trigger = { check_variable = { opt_ship_radar_lvl = 2 } } localization_key = opt_key_ship_radar_2 }
+    text = { trigger = { check_variable = { opt_ship_radar_lvl = 1 } } localization_key = opt_key_ship_radar_1 }
+    text = { localization_key = opt_key_empty }
+}
+
+defined_text = {
+    name = OptShipGuiModeDesc
+    text = { trigger = { check_variable = { opt_gui_mode = 1 } } localization_key = opt_ship_desc_1 }
+    text = { trigger = { check_variable = { opt_gui_mode = 2 } } localization_key = opt_ship_desc_dd_torp }
+    text = { trigger = { check_variable = { opt_gui_mode = 3 } } localization_key = opt_ship_desc_2 }
+    text = { trigger = { check_variable = { opt_gui_mode = 4 } } localization_key = opt_ship_desc_3 }
+    text = { trigger = { check_variable = { opt_gui_mode = 5 } } localization_key = opt_ship_desc_4 }
+    text = { localization_key = opt_ship_desc_5 }
+}
+defined_text = {
+    name = OptShipGuiSonarRadar
+    text = { trigger = { has_tech = improved_sonar has_tech = improved_decimetric_radar } localization_key = opt_ship_sr_max }
+    text = { trigger = { has_tech = improved_sonar has_tech = decimetric_radar } localization_key = opt_ship_sr_both_high }
+    text = { trigger = { has_tech = sonar has_tech = radio_detection } localization_key = opt_ship_sr_both_basic }
+    text = { trigger = { has_tech = sonar } localization_key = opt_ship_sr_sonar_only }
+    text = { localization_key = opt_ship_sr_none }
+}
+defined_text = {
+    name = OptShipGuiSnorkel
+    text = { trigger = { has_tech = improved_ship_hull_submarine has_tech = basic_submarine_snorkel } localization_key = opt_ship_snorkel_ready }
+    text = { localization_key = opt_ship_snorkel_not_ready }
+}
+
+defined_text = {
+    name = OptShipGetBBMid2Line
+    text = { trigger = { check_variable = { opt_ship_hull_tier > 1 } check_variable = { opt_ship_sec_lvl = 3 } } localization_key = opt_line_bb_mid2_dp }
+    text = { trigger = { check_variable = { opt_ship_hull_tier > 1 } check_variable = { opt_ship_sec_lvl = 2 } } localization_key = opt_line_bb_mid2_sec2 }
+    text = { trigger = { check_variable = { opt_ship_hull_tier > 1 } } localization_key = opt_line_bb_mid2_sec1 }
+    text = { localization_key = opt_sup_blank }
+}

@@ -1,0 +1,105 @@
+# 战略学说页签主报告（按预设 1=陆军 / 2=空军 / 3=海军 切换）
+defined_text = {
+    name = OptStratGuiReport
+    text = { trigger = { check_variable = { opt_gui_mode = 2 } } localization_key = opt_strat_report_air }
+    text = { trigger = { check_variable = { opt_gui_mode = 3 } } localization_key = opt_strat_report_navy }
+    text = { localization_key = opt_strat_report_land }
+}
+
+defined_text = {
+    name = OptStratGetBestLandDoc
+    text = { trigger = { check_variable = { opt_best_land_doc = 1 } } localization_key = opt_doc_land_mw }
+    text = { trigger = { check_variable = { opt_best_land_doc = 3 } } localization_key = opt_doc_land_gbp }
+    text = { trigger = { check_variable = { opt_best_land_doc = 4 } } localization_key = opt_doc_land_ma }
+    text = { localization_key = opt_doc_land_sf }
+}
+
+defined_text = {
+    name = OptStratGetBestAirDoc
+    text = { trigger = { check_variable = { opt_best_air_doc = 2 } } localization_key = opt_doc_air_sd }
+    text = { trigger = { check_variable = { opt_best_air_doc = 3 } } localization_key = opt_doc_air_oi }
+    text = { localization_key = opt_doc_air_bs }
+}
+
+defined_text = {
+    name = OptStratGetBestNavyDoc
+    text = { trigger = { check_variable = { opt_best_navy_doc = 2 } } localization_key = opt_doc_navy_bs }
+    text = { trigger = { check_variable = { opt_best_navy_doc = 3 } } localization_key = opt_doc_navy_fib }
+    text = { localization_key = opt_doc_navy_ti }
+}
+
+# --- 陆军部长状态（已上位 / 未上位高亮提醒）---
+defined_text = {
+    name = OptStratLandAdvMW
+    text = { trigger = { opt_has_hired_mw_advisor = yes }   localization_key = opt_adv_mw_hired }
+    text = { trigger = { opt_has_unhired_mw_advisor = yes } localization_key = opt_adv_mw_unhired }
+    text = { localization_key = opt_adv_none }
+}
+defined_text = {
+    name = OptStratLandAdvSF
+    text = { trigger = { opt_has_hired_sf_advisor = yes }   localization_key = opt_adv_sf_hired }
+    text = { trigger = { opt_has_unhired_sf_advisor = yes } localization_key = opt_adv_sf_unhired }
+    text = { localization_key = opt_adv_none }
+}
+defined_text = {
+    name = OptStratLandAdvGBP
+    text = { trigger = { opt_has_hired_gbp_advisor = yes }   localization_key = opt_adv_gbp_hired }
+    text = { trigger = { opt_has_unhired_gbp_advisor = yes } localization_key = opt_adv_gbp_unhired }
+    text = { localization_key = opt_adv_none }
+}
+defined_text = {
+    name = OptStratLandAdvMA
+    text = { trigger = { opt_has_hired_ma_advisor = yes }   localization_key = opt_adv_ma_hired }
+    text = { trigger = { opt_has_unhired_ma_advisor = yes } localization_key = opt_adv_ma_unhired }
+    text = { localization_key = opt_adv_none }
+}
+
+# --- 空军部长状态 ---
+defined_text = {
+    name = OptStratAirAdvBS
+    text = { trigger = { opt_has_hired_air_bs_advisor = yes }   localization_key = opt_adv_air_bs_hired }
+    text = { trigger = { opt_has_unhired_air_bs_advisor = yes } localization_key = opt_adv_air_bs_unhired }
+    text = { localization_key = opt_adv_none }
+}
+defined_text = {
+    name = OptStratAirAdvSD
+    text = { trigger = { opt_has_hired_air_sd_advisor = yes }   localization_key = opt_adv_air_sd_hired }
+    text = { trigger = { opt_has_unhired_air_sd_advisor = yes } localization_key = opt_adv_air_sd_unhired }
+    text = { localization_key = opt_adv_none }
+}
+
+# --- 海军部长状态 ---
+defined_text = {
+    name = OptStratNavyAdvTI
+    text = { trigger = { opt_has_hired_navy_ti_advisor = yes }   localization_key = opt_adv_navy_ti_hired }
+    text = { trigger = { opt_has_unhired_navy_ti_advisor = yes } localization_key = opt_adv_navy_ti_unhired }
+    text = { localization_key = opt_adv_none }
+}
+defined_text = {
+    name = OptStratNavyAdvBS
+    text = { trigger = { opt_has_hired_navy_bs_advisor = yes }   localization_key = opt_adv_navy_bs_hired }
+    text = { trigger = { opt_has_unhired_navy_bs_advisor = yes } localization_key = opt_adv_navy_bs_unhired }
+    text = { localization_key = opt_adv_none }
+}
+defined_text = {
+    name = OptStratNavyAdvFIB
+    text = { trigger = { opt_has_hired_navy_fib_advisor = yes }   localization_key = opt_adv_navy_fib_hired }
+    text = { trigger = { opt_has_unhired_navy_fib_advisor = yes } localization_key = opt_adv_navy_fib_unhired }
+    text = { localization_key = opt_adv_none }
+}
+
+# 1.17+ 陆军子学说轨道（步兵 / 炮兵 / 装甲）与理论家精准搭配
+defined_text = {
+    name = OptStratLandTheoristTip
+    text = { trigger = { check_variable = { opt_best_land_doc = 1 } } localization_key = opt_theo_tip_mw }
+    text = { trigger = { check_variable = { opt_best_land_doc = 3 } } localization_key = opt_theo_tip_gbp }
+    text = { trigger = { check_variable = { opt_best_land_doc = 4 } } localization_key = opt_theo_tip_ma }
+    text = { localization_key = opt_theo_tip_sf }
+}
+defined_text = {
+    name = OptStratLandSubdocs
+    text = { trigger = { check_variable = { opt_best_land_doc = 1 } } localization_key = opt_subdoc_mw }
+    text = { trigger = { check_variable = { opt_best_land_doc = 3 } } localization_key = opt_subdoc_gbp }
+    text = { trigger = { check_variable = { opt_best_land_doc = 4 } } localization_key = opt_subdoc_ma }
+    text = { localization_key = opt_subdoc_sf }
+}

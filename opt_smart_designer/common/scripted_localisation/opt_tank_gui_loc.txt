@@ -1,0 +1,171 @@
+defined_text = { name = OptGuiGetTab1Label text = { trigger = { check_variable = { opt_gui_tab = 1 } } localization_key = opt_tab_1_active } text = { localization_key = opt_tab_1_normal } }
+defined_text = { name = OptGuiGetTab2Label text = { trigger = { check_variable = { opt_gui_tab = 2 } } localization_key = opt_tab_2_active } text = { localization_key = opt_tab_2_normal } }
+defined_text = { name = OptGuiGetTab3Label text = { trigger = { check_variable = { opt_gui_tab = 3 } } localization_key = opt_tab_3_active } text = { localization_key = opt_tab_3_normal } }
+defined_text = { name = OptGuiGetTab4Label text = { trigger = { check_variable = { opt_gui_tab = 4 } } localization_key = opt_tab_4_active } text = { localization_key = opt_tab_4_normal } }
+defined_text = { name = OptGuiGetTab5Label text = { trigger = { check_variable = { opt_gui_tab = 5 } } localization_key = opt_tab_5_active } text = { localization_key = opt_tab_5_normal } }
+
+# 预设按钮 1~8：未解锁核心前置科技时自动标红（§R...§!），已解锁且选中时标黄
+defined_text = {
+    name = OptGuiGetMode1Label
+    text = { trigger = { check_variable = { opt_gui_tab = 1 } } localization_key = opt_mode_strat_1 }
+    text = { trigger = { check_variable = { opt_gui_tab = 2 } NOT = { has_tech = basic_light_tank_chassis } } localization_key = opt_mode_tank_1_lock }
+    text = { trigger = { check_variable = { opt_gui_tab = 2 } } localization_key = opt_mode_tank_1 }
+    text = { trigger = { check_variable = { opt_gui_tab = 3 } NOT = { has_tech = basic_small_airframe } } localization_key = opt_mode_plane_1_lock }
+    text = { trigger = { check_variable = { opt_gui_tab = 3 } } localization_key = opt_mode_plane_1 }
+    text = { trigger = { check_variable = { opt_gui_tab = 4 } NOT = { has_tech = early_ship_hull_light } } localization_key = opt_mode_ship_1_lock }
+    text = { trigger = { check_variable = { opt_gui_tab = 4 } } localization_key = opt_mode_ship_1 }
+    text = { localization_key = opt_mode_div_1 }
+}
+defined_text = {
+    name = OptGuiGetMode2Label
+    text = { trigger = { check_variable = { opt_gui_tab = 1 } } localization_key = opt_mode_strat_2 }
+    text = { trigger = { check_variable = { opt_gui_tab = 2 } NOT = { has_tech = basic_medium_tank_chassis } } localization_key = opt_mode_tank_2_lock }
+    text = { trigger = { check_variable = { opt_gui_tab = 2 } } localization_key = opt_mode_tank_2 }
+    text = { trigger = { check_variable = { opt_gui_tab = 3 } NOT = { has_tech = basic_small_airframe } } localization_key = opt_mode_plane_2_lock }
+    text = { trigger = { check_variable = { opt_gui_tab = 3 } } localization_key = opt_mode_plane_2 }
+    text = { trigger = { check_variable = { opt_gui_tab = 4 } NOT = { has_tech = early_ship_hull_light } } localization_key = opt_mode_ship_2_lock }
+    text = { trigger = { check_variable = { opt_gui_tab = 4 } } localization_key = opt_mode_ship_2 }
+    text = { trigger = { NOT = { has_tech = interwar_artillery } } localization_key = opt_mode_div_2_lock }
+    text = { localization_key = opt_mode_div_2 }
+}
+defined_text = {
+    name = OptGuiGetMode3Label
+    text = { trigger = { check_variable = { opt_gui_tab = 1 } } localization_key = opt_mode_strat_3 }
+    text = { trigger = { check_variable = { opt_gui_tab = 2 } NOT = { has_tech = basic_heavy_tank_chassis } } localization_key = opt_mode_tank_3_lock }
+    text = { trigger = { check_variable = { opt_gui_tab = 2 } } localization_key = opt_mode_tank_3 }
+    text = { trigger = { check_variable = { opt_gui_tab = 3 } NOT = { AND = { has_tech = basic_small_airframe has_tech = air_torpedoe_1 } } } localization_key = opt_mode_plane_3_lock }
+    text = { trigger = { check_variable = { opt_gui_tab = 3 } } localization_key = opt_mode_plane_3 }
+    text = { trigger = { check_variable = { opt_gui_tab = 4 } NOT = { has_tech = early_ship_hull_cruiser } } localization_key = opt_mode_ship_3_lock }
+    text = { trigger = { check_variable = { opt_gui_tab = 4 } } localization_key = opt_mode_ship_3 }
+    text = { trigger = { NOT = { AND = { has_tech = basic_light_tank_chassis has_tech = motorised_infantry } } } localization_key = opt_mode_div_3_lock }
+    text = { localization_key = opt_mode_div_3 }
+}
+defined_text = {
+    name = OptGuiGetMode4Label
+    text = { trigger = { check_variable = { opt_gui_tab = 2 } NOT = { AND = { has_tech = basic_medium_tank_chassis has_tech = tech_engineers2 } } } localization_key = opt_mode_tank_4_lock }
+    text = { trigger = { check_variable = { opt_gui_tab = 2 } } localization_key = opt_mode_tank_4 }
+    text = { trigger = { check_variable = { opt_gui_tab = 3 } NOT = { has_tech = basic_large_airframe } } localization_key = opt_mode_plane_4_lock }
+    text = { trigger = { check_variable = { opt_gui_tab = 3 } } localization_key = opt_mode_plane_4 }
+    text = { trigger = { check_variable = { opt_gui_tab = 4 } NOT = { has_tech = early_ship_hull_submarine } } localization_key = opt_mode_ship_4_lock }
+    text = { trigger = { check_variable = { opt_gui_tab = 4 } } localization_key = opt_mode_ship_4 }
+    text = { trigger = { NOT = { AND = { has_tech = basic_medium_tank_chassis has_tech = motorised_infantry } } } localization_key = opt_mode_div_4_lock }
+    text = { localization_key = opt_mode_div_4 }
+}
+defined_text = {
+    name = OptGuiGetMode5Label
+    text = { trigger = { check_variable = { opt_gui_tab = 2 } NOT = { has_tech = basic_light_tank_chassis } } localization_key = opt_mode_tank_5_lock }
+    text = { trigger = { check_variable = { opt_gui_tab = 2 } } localization_key = opt_mode_tank_5 }
+    text = { trigger = { check_variable = { opt_gui_tab = 3 } NOT = { has_tech = basic_small_airframe } } localization_key = opt_mode_plane_5_lock }
+    text = { trigger = { check_variable = { opt_gui_tab = 3 } } localization_key = opt_mode_plane_5 }
+    text = { trigger = { check_variable = { opt_gui_tab = 4 } NOT = { has_tech = early_ship_hull_heavy } } localization_key = opt_mode_ship_5_lock }
+    text = { trigger = { check_variable = { opt_gui_tab = 4 } } localization_key = opt_mode_ship_5 }
+    text = { trigger = { NOT = { AND = { has_tech = interwar_artillery has_tech = basic_heavy_tank_chassis } } } localization_key = opt_mode_div_5_lock }
+    text = { localization_key = opt_mode_div_5 }
+}
+defined_text = {
+    name = OptGuiGetMode6Label
+    text = { trigger = { check_variable = { opt_gui_tab = 2 } NOT = { AND = { has_tech = basic_medium_tank_chassis has_tech = artillery1 } } } localization_key = opt_mode_tank_6_lock }
+    text = { trigger = { check_variable = { opt_gui_tab = 2 } } localization_key = opt_mode_tank_6 }
+    text = { trigger = { check_variable = { opt_gui_tab = 3 } NOT = { AND = { has_tech = basic_small_airframe has_tech = air_torpedoe_1 } } } localization_key = opt_mode_plane_6_lock }
+    text = { trigger = { check_variable = { opt_gui_tab = 3 } } localization_key = opt_mode_plane_6 }
+    text = { trigger = { check_variable = { opt_gui_tab = 4 } NOT = { has_tech = early_ship_hull_carrier } } localization_key = opt_mode_ship_6_lock }
+    text = { trigger = { check_variable = { opt_gui_tab = 4 } } localization_key = opt_mode_ship_6 }
+    text = { trigger = { NOT = { AND = { has_tech = tech_mountaineers has_tech = interwar_artillery } } } localization_key = opt_mode_div_6_lock }
+    text = { localization_key = opt_mode_div_6 }
+}
+defined_text = {
+    name = OptGuiGetMode7Label
+    text = { trigger = { check_variable = { opt_gui_tab = 2 } NOT = { has_tech = main_battle_tank_chassis } } localization_key = opt_mode_tank_7_lock }
+    text = { trigger = { check_variable = { opt_gui_tab = 2 } } localization_key = opt_mode_tank_7 }
+    text = { trigger = { check_variable = { opt_gui_tab = 3 } NOT = { has_tech = basic_medium_airframe } } localization_key = opt_mode_plane_7_lock }
+    text = { trigger = { check_variable = { opt_gui_tab = 3 } } localization_key = opt_mode_plane_7 }
+    text = { trigger = { NOT = { AND = { has_tech = marines has_tech = interwar_artillery } } } localization_key = opt_mode_div_7_lock }
+    text = { localization_key = opt_mode_div_7 }
+}
+defined_text = {
+    name = OptGuiGetMode8Label
+    text = { localization_key = opt_mode_div_8 }
+}
+
+defined_text = {
+    name = OptGuiGetEraLabel
+    text = { trigger = { check_variable = { opt_gui_era = 1 } } localization_key = opt_era_1936 }
+    text = { trigger = { check_variable = { opt_gui_era = 3 } } localization_key = opt_era_1944 }
+    text = { localization_key = opt_era_1940 }
+}
+
+defined_text = {
+    name = OptGuiGetTheaterLabel
+    text = { trigger = { check_variable = { opt_gui_theater = 2 } } localization_key = opt_theater_east }
+    text = { trigger = { check_variable = { opt_gui_theater = 3 } } localization_key = opt_theater_africa }
+    text = { trigger = { check_variable = { opt_gui_theater = 4 } } localization_key = opt_theater_pacific }
+    text = { localization_key = opt_theater_short }
+}
+
+defined_text = {
+    name = OptGuiGetAutoUpgradeLabel
+    text = { trigger = { check_variable = { opt_auto_upgrade = 1 } } localization_key = opt_auto_upg_on }
+    text = { localization_key = opt_auto_upg_off }
+}
+
+defined_text = {
+    name = OptGuiGetLiveReport
+    text = { trigger = { check_variable = { opt_gui_tab = 1 } } localization_key = opt_gui_report_strat }
+    text = { trigger = { check_variable = { opt_gui_tab = 2 } } localization_key = opt_gui_live_report }
+    text = { trigger = { check_variable = { opt_gui_tab = 3 } } localization_key = opt_gui_report_plane }
+    text = { trigger = { check_variable = { opt_gui_tab = 4 } } localization_key = opt_gui_report_ship }
+    text = { localization_key = opt_gui_report_div }
+}
+
+defined_text = {
+    name = OptGuiGetActionBtnText
+    text = { trigger = { check_variable = { opt_gui_tab = 1 } } localization_key = opt_gui_refresh_strat_btn }
+    text = { localization_key = opt_gui_generate_btn_text }
+}
+
+defined_text = {
+    name = OptGuiGetXpCost
+    text = { trigger = { check_variable = { opt_gui_tab = 3 } } localization_key = opt_gui_air_xp_20 }
+    text = { trigger = { check_variable = { opt_gui_tab = 4 } } localization_key = opt_gui_navy_xp_20 }
+    text = { trigger = { check_variable = { opt_gui_tab = 5 } } localization_key = opt_gui_army_xp_25 }
+    text = { localization_key = opt_gui_xp_20 }
+}
+
+defined_text = {
+    name = OptGuiGetModeDesc
+    text = { trigger = { check_variable = { opt_gui_mode = 1 } } localization_key = opt_gui_desc_mode_1 }
+    text = { trigger = { check_variable = { opt_gui_mode = 2 } } localization_key = opt_gui_desc_mode_2 }
+    text = { trigger = { check_variable = { opt_gui_mode = 3 } } localization_key = opt_gui_desc_mode_3 }
+    text = { trigger = { check_variable = { opt_gui_mode = 4 } } localization_key = opt_gui_desc_mode_4 }
+    text = { trigger = { check_variable = { opt_gui_mode = 5 } } localization_key = opt_gui_desc_mode_5 }
+    text = { trigger = { check_variable = { opt_gui_mode = 6 } } localization_key = opt_gui_desc_mode_6 }
+    text = { localization_key = opt_gui_desc_mode_7 }
+}
+defined_text = {
+    name = OptGuiGetChassisStatus
+    text = { trigger = { has_tech = advanced_medium_tank_chassis } localization_key = opt_gui_chassis_1943 }
+    text = { trigger = { has_tech = improved_medium_tank_chassis } localization_key = opt_gui_chassis_1940 }
+    text = { trigger = { has_tech = basic_medium_tank_chassis }    localization_key = opt_gui_chassis_1938 }
+    text = { localization_key = opt_gui_chassis_none }
+}
+defined_text = {
+    name = OptGuiGetDoctrineReason
+    text = { trigger = { opt_is_mobile_warfare = yes }     localization_key = opt_gui_doc_mw }
+    text = { trigger = { opt_is_superior_firepower = yes } localization_key = opt_gui_doc_sf }
+    text = { localization_key = opt_gui_doc_default }
+}
+defined_text = {
+    name = OptGuiGetMioReason
+    text = { trigger = { opt_has_tank_mio_reliability_bonus = yes } localization_key = opt_gui_mio_active }
+    text = { localization_key = opt_gui_mio_inactive }
+}
+defined_text = {
+    name = OptGuiGetResourceReason
+    text = { trigger = { has_resources_in_country = { resource = chromium amount > 15 } } localization_key = opt_gui_res_chromium_ok }
+    text = { localization_key = opt_gui_res_chromium_low }
+}
+defined_text = {
+    name = OptGuiGetLeaderReason
+    text = { trigger = { any_unit_leader = { has_trait = panzer_leader } } localization_key = opt_gui_leader_panzer }
+    text = { localization_key = opt_gui_leader_none }
+}

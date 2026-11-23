@@ -1,0 +1,202 @@
+opt_assemble_plane = {
+    if = {
+        limit = { check_variable = { opt_plane_mode = 4 } }
+        # 战略轰炸机（受 opt_gui_era 上限控制）
+        if = { limit = { check_variable = { opt_gui_era > 2 } has_tech = advanced_large_airframe } set_variable = { opt_plane_frame_tier = 3 } }
+        else_if = { limit = { check_variable = { opt_gui_era > 1 } has_tech = improved_large_airframe } set_variable = { opt_plane_frame_tier = 2 } }
+        else = { set_variable = { opt_plane_frame_tier = 1 } }
+
+        if = { limit = { check_variable = { opt_plane_frame_tier = 3 } has_tech = jet_engines } set_variable = { opt_plane_engine_id = 5 } }
+        else_if = { limit = { check_variable = { opt_gui_era > 2 } has_tech = engines_4 } set_variable = { opt_plane_engine_id = 4 } }
+        else_if = { limit = { check_variable = { opt_gui_era > 1 } has_tech = engines_3 } set_variable = { opt_plane_engine_id = 3 } }
+        else = { set_variable = { opt_plane_engine_id = 2 } }
+
+        if = { limit = { has_tech = survivability_studies has_resources_in_country = { resource = rubber amount > 15 } } set_variable = { opt_strat_spec1 = 1 } }
+        else_if = { limit = { has_tech = survivability_studies } set_variable = { opt_strat_spec1 = 2 } }
+        else = { set_variable = { opt_strat_spec1 = 0 } }
+
+        if = { limit = { has_tech = aa_hmg } set_variable = { opt_strat_turret = 2 } }
+        else = { set_variable = { opt_strat_turret = 1 } }
+
+        opt_bump_plane_version = yes
+
+        meta_effect = {
+            text = {
+                create_equipment_variant = {
+                    name = "[PLANE_NAME] [VER]"
+                    type = [STRAT_FRAME]
+                    parent_version = [PREV_VER]
+                    modules = {
+                        fixed_main_weapon_slot = large_bomb_bay
+                        fixed_auxiliary_weapon_slot_1 = large_bomb_bay
+                        [STRAT_AUX2_LINE]
+                        engine_type_slot = [STRAT_ENGINE]
+                        special_type_slot_1 = [STRAT_SPEC1]
+                        special_type_slot_2 = [STRAT_TURRET]
+                        special_type_slot_3 = [STRAT_TURRET]
+                    }
+                }
+            }
+            PLANE_NAME = "[OptPlaneGetName]"
+            VER = "[OptGetRomanVer]"
+            PREV_VER = "[?opt_prev_ver|0]"
+            STRAT_FRAME = "[OptPlaneGetStratFrame]"
+            STRAT_AUX2_LINE = "[OptPlaneGetStratAux2Line]"
+            STRAT_ENGINE = "[OptPlaneGetStratEngine]"
+            STRAT_SPEC1 = "[OptPlaneGetStratSpec1]"
+            STRAT_TURRET = "[OptPlaneGetStratTurret]"
+        }
+    }
+
+    else_if = {
+        limit = { check_variable = { opt_plane_mode = 7 } }
+        # 模式 7：远洋双发重型战斗机（Medium Airframe，太平洋/东线大空区制空神器）
+        if = { limit = { check_variable = { opt_gui_era > 2 } has_tech = advanced_medium_airframe } set_variable = { opt_plane_frame_tier = 3 } }
+        else_if = { limit = { check_variable = { opt_gui_era > 1 } has_tech = improved_medium_airframe } set_variable = { opt_plane_frame_tier = 2 } }
+        else = { set_variable = { opt_plane_frame_tier = 1 } }
+
+        if = { limit = { check_variable = { opt_plane_frame_tier = 3 } has_tech = jet_engines } set_variable = { opt_plane_engine_id = 5 } }
+        else_if = { limit = { check_variable = { opt_gui_era > 2 } has_tech = engines_4 } set_variable = { opt_plane_engine_id = 4 } }
+        else_if = { limit = { check_variable = { opt_gui_era > 1 } has_tech = engines_3 } set_variable = { opt_plane_engine_id = 3 } }
+        else = { set_variable = { opt_plane_engine_id = 2 } }
+
+        if = { limit = { has_tech = aa_hmg } set_variable = { opt_plane_main_id = 1 } }
+        else = { set_variable = { opt_plane_main_id = 2 } }
+
+        if = { limit = { has_tech = survivability_studies has_resources_in_country = { resource = rubber amount > 15 } } set_variable = { opt_hf_spec1 = 1 } }
+        else_if = { limit = { has_tech = survivability_studies } set_variable = { opt_hf_spec1 = 2 } }
+        else = { set_variable = { opt_hf_spec1 = 0 } }
+        if = { limit = { has_tech = range_improvements } set_variable = { opt_plane_spec2_id = 3 } }
+        else = { set_variable = { opt_plane_spec2_id = 0 } }
+
+        opt_bump_plane_version = yes
+
+        meta_effect = {
+            text = {
+                create_equipment_variant = {
+                    name = "[PLANE_NAME] [VER]"
+                    type = [HF_FRAME]
+                    parent_version = [PREV_VER]
+                    modules = {
+                        fixed_main_weapon_slot = [MAIN_WPN]
+                        fixed_auxiliary_weapon_slot_1 = [MAIN_WPN]
+                        [HF_AUX2_LINE]
+                        engine_type_slot = [HF_ENGINE]
+                        special_type_slot_1 = [HF_SPEC1]
+                        special_type_slot_2 = [SPEC_2]
+                    }
+                }
+            }
+            PLANE_NAME = "[OptPlaneGetName]"
+            VER = "[OptGetRomanVer]"
+            PREV_VER = "[?opt_prev_ver|0]"
+            HF_FRAME = "[OptPlaneGetHFFrame]"
+            MAIN_WPN = "[OptPlaneGetMainWpn]"
+            HF_AUX2_LINE = "[OptPlaneGetHFAux2Line]"
+            HF_ENGINE = "[OptPlaneGetHFEngine]"
+            HF_SPEC1 = "[OptPlaneGetHFSpec1]"
+            SPEC_2 = "[OptPlaneGetSpec2]" 
+        }
+    }
+    else = {
+        # 轻型机身（1空优 / 2CAS / 3陆基海轰 / 5舰载战机 / 6舰载海轰）（1空优 / 2CAS / 3海轰 / 5舰载战机），受 opt_gui_era 基底上限控制
+        if = { limit = { check_variable = { opt_gui_era > 2 } has_tech = advanced_small_airframe } set_variable = { opt_plane_frame_tier = 3 } }
+        else_if = { limit = { check_variable = { opt_gui_era > 1 } has_tech = improved_small_airframe } set_variable = { opt_plane_frame_tier = 2 } }
+        else = { set_variable = { opt_plane_frame_tier = 1 } }
+
+        if = { limit = { check_variable = { opt_plane_frame_tier = 3 } has_tech = jet_engines } set_variable = { opt_plane_engine_id = 5 } }
+        else_if = { limit = { check_variable = { opt_gui_era > 2 } has_tech = engines_4 } set_variable = { opt_plane_engine_id = 4 } }
+        else_if = { limit = { check_variable = { opt_gui_era > 1 } has_tech = engines_3 } set_variable = { opt_plane_engine_id = 3 } }
+        else_if = { limit = { has_tech = engines_2 } set_variable = { opt_plane_engine_id = 2 } }
+        else = { set_variable = { opt_plane_engine_id = 1 } }
+
+        set_variable = { opt_plane_aux1_id = 0 }
+        set_variable = { opt_plane_aux2_id = 0 }
+        set_variable = { opt_plane_spec1_id = 0 }
+        set_variable = { opt_plane_spec2_id = 0 }
+
+        if = {
+            limit = { OR = { check_variable = { opt_plane_mode = 1 } check_variable = { opt_plane_mode = 5 } } }
+            if = { limit = { has_tech = aa_hmg } set_variable = { opt_plane_main_id = 1 } }
+            else = { set_variable = { opt_plane_main_id = 2 } }
+
+            if = { limit = { check_variable = { opt_plane_engine_id > 1 } } set_variable = { opt_plane_aux1_id = opt_plane_main_id } }
+            if = {
+                limit = { check_variable = { opt_plane_frame_tier > 1 } check_variable = { opt_plane_engine_id > 2 } }
+                if = { limit = { has_tech = aa_cannon_1 } set_variable = { opt_plane_aux2_id = 3 } }
+                else = { set_variable = { opt_plane_aux2_id = opt_plane_main_id } }
+            }
+
+            opt_score_plane_spec1 = yes
+
+            if = {
+                limit = { check_variable = { opt_plane_spec1_id = 3 } has_tech = survivability_studies has_resources_in_country = { resource = rubber amount > 15 } check_variable = { opt_plane_engine_id > 1 } }
+                set_variable = { opt_plane_spec2_id = 1 }
+            }
+            else_if = {
+                limit = { NOT = { check_variable = { opt_plane_spec1_id = 3 } } has_tech = range_improvements check_variable = { opt_plane_engine_id > 1 } }
+                set_variable = { opt_plane_spec2_id = 3 }
+            }
+        }
+        else_if = {
+            limit = { check_variable = { opt_plane_mode = 2 } }
+            set_variable = { opt_plane_main_id = 4 }
+            if = { limit = { has_tech = early_bombs check_variable = { opt_plane_engine_id > 1 } } set_variable = { opt_plane_main_id = 5 } set_variable = { opt_plane_aux1_id = 4 } }
+            if = { limit = { check_variable = { opt_plane_frame_tier > 1 } check_variable = { opt_plane_engine_id > 2 } } set_variable = { opt_plane_aux2_id = 4 } }
+            if = { limit = { has_tech = early_bombs check_variable = { opt_plane_engine_id > 1 } } set_variable = { opt_plane_spec1_id = 4 } }
+            if = { limit = { check_variable = { opt_gui_theater > 1 } has_tech = range_improvements } set_variable = { opt_plane_spec2_id = 3 } }
+            else_if = { limit = { has_tech = survivability_studies has_resources_in_country = { resource = rubber amount > 15 } check_variable = { opt_plane_engine_id > 2 } } set_variable = { opt_plane_spec2_id = 1 } }
+            else_if = { limit = { has_tech = range_improvements } set_variable = { opt_plane_spec2_id = 3 } }
+        }
+        else = {
+            set_variable = { opt_plane_main_id = 6 }
+            if = { limit = { has_tech = range_improvements } set_variable = { opt_plane_spec1_id = 3 } }
+            if = { limit = { has_tech = survivability_studies has_resources_in_country = { resource = rubber amount > 15 } check_variable = { opt_plane_engine_id > 1 } } set_variable = { opt_plane_spec2_id = 1 } }
+            else_if = { limit = { check_variable = { opt_plane_engine_id > 1 } } set_variable = { opt_plane_spec2_id = 5 } }
+        }
+
+        opt_bump_plane_version = yes
+
+        meta_effect = {
+            text = {
+                create_equipment_variant = {
+                    name = "[PLANE_NAME] [VER]"
+                    type = [AIRFRAME]
+                    parent_version = [PREV_VER]
+                    modules = {
+                        fixed_main_weapon_slot = [MAIN_WPN]
+                        fixed_auxiliary_weapon_slot_1 = [AUX_1]
+                        [AUX_2_LINE]
+                        engine_type_slot = [ENGINE]
+                        special_type_slot_1 = [SPEC_1]
+                        special_type_slot_2 = [SPEC_2]
+                    }
+                }
+            }
+            PLANE_NAME = "[OptPlaneGetName]"
+            VER = "[OptGetRomanVer]"
+            PREV_VER = "[?opt_prev_ver|0]"
+            AIRFRAME = "[OptPlaneGetAirframe]"
+            MAIN_WPN = "[OptPlaneGetMainWpn]"
+            AUX_1 = "[OptPlaneGetAux1]"
+            AUX_2_LINE = "[OptPlaneGetAux2Line]"
+            ENGINE = "[OptPlaneGetEngine]"
+            SPEC_1 = "[OptPlaneGetSpec1]"
+            SPEC_2 = "[OptPlaneGetSpec2]"
+        }
+    }
+
+    clear_variable = opt_plane_mode
+    clear_variable = opt_plane_frame_tier
+    clear_variable = opt_plane_engine_id
+    clear_variable = opt_plane_main_id
+    clear_variable = opt_plane_aux1_id
+    clear_variable = opt_plane_aux2_id
+    clear_variable = opt_plane_spec1_id
+    clear_variable = opt_plane_spec2_id
+    clear_variable = opt_strat_spec1
+    clear_variable = opt_strat_turret
+    clear_variable = opt_hf_spec1
+    clear_variable = opt_cur_ver
+    clear_variable = opt_prev_ver
+}

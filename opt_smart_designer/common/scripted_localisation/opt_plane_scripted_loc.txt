@@ -1,0 +1,170 @@
+defined_text = {
+    name = OptPlaneGetName
+    text = { trigger = { check_variable = { opt_plane_mode = 1 } } localization_key = opt_plane_name_fighter }
+    text = { trigger = { check_variable = { opt_plane_mode = 2 } } localization_key = opt_plane_name_cas }
+    text = { trigger = { check_variable = { opt_plane_mode = 4 } } localization_key = opt_plane_name_strat }
+    text = { trigger = { check_variable = { opt_plane_mode = 5 } } localization_key = opt_plane_name_cv }
+    text = { trigger = { check_variable = { opt_plane_mode = 6 } } localization_key = opt_plane_name_cv_nav }
+    text = { trigger = { check_variable = { opt_plane_mode = 7 } } localization_key = opt_plane_name_hf }
+    text = { localization_key = opt_plane_name_nav }
+}
+defined_text = {
+    name = OptPlaneGetAirframe
+    text = { trigger = { check_variable = { opt_plane_mode = 1 } check_variable = { opt_plane_frame_tier = 3 } } localization_key = opt_key_small_plane_airframe_3 }
+    text = { trigger = { check_variable = { opt_plane_mode = 1 } check_variable = { opt_plane_frame_tier = 2 } } localization_key = opt_key_small_plane_airframe_2 }
+    text = { trigger = { check_variable = { opt_plane_mode = 1 } } localization_key = opt_key_small_plane_airframe_1 }
+    text = { trigger = { check_variable = { opt_plane_mode = 5 } check_variable = { opt_plane_frame_tier = 3 } } localization_key = opt_key_cv_small_plane_airframe_3 }
+    text = { trigger = { check_variable = { opt_plane_mode = 5 } check_variable = { opt_plane_frame_tier = 2 } } localization_key = opt_key_cv_small_plane_airframe_2 }
+    text = { trigger = { check_variable = { opt_plane_mode = 5 } } localization_key = opt_key_cv_small_plane_airframe_1 }
+    text = { trigger = { check_variable = { opt_plane_mode = 6 } check_variable = { opt_plane_frame_tier = 3 } } localization_key = opt_key_cv_small_plane_naval_bomber_airframe_3 }
+    text = { trigger = { check_variable = { opt_plane_mode = 6 } check_variable = { opt_plane_frame_tier = 2 } } localization_key = opt_key_cv_small_plane_naval_bomber_airframe_2 }
+    text = { trigger = { check_variable = { opt_plane_mode = 6 } } localization_key = opt_key_cv_small_plane_naval_bomber_airframe_1 }
+    text = { trigger = { check_variable = { opt_plane_mode = 2 } check_variable = { opt_plane_frame_tier = 3 } } localization_key = opt_key_small_plane_cas_airframe_3 }
+    text = { trigger = { check_variable = { opt_plane_mode = 2 } check_variable = { opt_plane_frame_tier = 2 } } localization_key = opt_key_small_plane_cas_airframe_2 }
+    text = { trigger = { check_variable = { opt_plane_mode = 2 } } localization_key = opt_key_small_plane_cas_airframe_1 }
+    text = { trigger = { check_variable = { opt_plane_frame_tier = 3 } } localization_key = opt_key_small_plane_naval_bomber_airframe_3 }
+    text = { trigger = { check_variable = { opt_plane_frame_tier = 2 } } localization_key = opt_key_small_plane_naval_bomber_airframe_2 }
+    text = { localization_key = opt_key_small_plane_naval_bomber_airframe_1 }
+}
+defined_text = {
+    name = OptPlaneGetEngine
+    text = { trigger = { check_variable = { opt_plane_engine_id = 5 } } localization_key = opt_key_jet_engine_1x }
+    text = { trigger = { check_variable = { opt_plane_engine_id = 4 } } localization_key = opt_key_engine_4_1x }
+    text = { trigger = { check_variable = { opt_plane_engine_id = 3 } } localization_key = opt_key_engine_3_1x }
+    text = { trigger = { check_variable = { opt_plane_engine_id = 2 } } localization_key = opt_key_engine_2_1x }
+    text = { localization_key = opt_key_engine_1_1x }
+}
+defined_text = {
+    name = OptPlaneGetMainWpn
+    text = { trigger = { check_variable = { opt_plane_main_id = 6 } } localization_key = opt_key_torpedo_mounting }
+    text = { trigger = { check_variable = { opt_plane_main_id = 5 } } localization_key = opt_key_small_bomb_bay }
+    text = { trigger = { check_variable = { opt_plane_main_id = 4 } } localization_key = opt_key_bomb_locks }
+    text = { trigger = { check_variable = { opt_plane_main_id = 1 } } localization_key = opt_key_heavy_mg_4x }
+    text = { localization_key = opt_key_light_mg_4x }
+}
+defined_text = {
+    name = OptPlaneGetAux1
+    text = { trigger = { check_variable = { opt_plane_aux1_id = 4 } } localization_key = opt_key_bomb_locks }
+    text = { trigger = { check_variable = { opt_plane_aux1_id = 1 } } localization_key = opt_key_heavy_mg_4x }
+    text = { trigger = { check_variable = { opt_plane_aux1_id = 2 } } localization_key = opt_key_light_mg_4x }
+    text = { localization_key = opt_key_empty }
+}
+defined_text = {
+    name = OptPlaneGetAux2Line
+    text = { trigger = { check_variable = { opt_plane_aux2_id = 4 } } localization_key = opt_line_aux2_bomb_locks }
+    text = { trigger = { check_variable = { opt_plane_aux2_id = 3 } } localization_key = opt_line_aux2_cannon }
+    text = { trigger = { check_variable = { opt_plane_aux2_id = 1 } } localization_key = opt_line_aux2_hmg }
+    text = { trigger = { check_variable = { opt_plane_aux2_id = 2 } } localization_key = opt_line_aux2_lmg }
+    text = { localization_key = opt_sup_blank }
+}
+defined_text = {
+    name = OptPlaneGetSpec1
+    text = { trigger = { check_variable = { opt_plane_spec1_id = 4 } } localization_key = opt_key_dive_brakes_small }
+    text = { trigger = { check_variable = { opt_plane_spec1_id = 3 } } localization_key = opt_key_drop_tanks }
+    text = { trigger = { check_variable = { opt_plane_spec1_id = 2 } } localization_key = opt_key_armor_plate_small }
+    text = { trigger = { check_variable = { opt_plane_spec1_id = 1 } } localization_key = opt_key_self_sealing_fuel_tanks_small }
+    text = { localization_key = opt_key_empty }
+}
+defined_text = {
+    name = OptPlaneGetSpec2
+    text = { trigger = { check_variable = { opt_plane_spec2_id = 5 } } localization_key = opt_key_floats }
+    text = { trigger = { check_variable = { opt_plane_spec2_id = 3 } } localization_key = opt_key_drop_tanks }
+    text = { trigger = { check_variable = { opt_plane_spec2_id = 1 } } localization_key = opt_key_self_sealing_fuel_tanks_small }
+    text = { localization_key = opt_key_empty }
+}
+
+# 战略轰炸机映射
+defined_text = {
+    name = OptPlaneGetStratFrame
+    text = { trigger = { check_variable = { opt_plane_frame_tier = 3 } } localization_key = opt_key_large_plane_airframe_3 }
+    text = { trigger = { check_variable = { opt_plane_frame_tier = 2 } } localization_key = opt_key_large_plane_airframe_2 }
+    text = { localization_key = opt_key_large_plane_airframe_1 }
+}
+defined_text = {
+    name = OptPlaneGetStratAux2Line
+    text = { trigger = { check_variable = { opt_plane_frame_tier > 1 } } localization_key = opt_line_strat_aux2_bomb }
+    text = { localization_key = opt_sup_blank }
+}
+defined_text = {
+    name = OptPlaneGetStratEngine
+    text = { trigger = { check_variable = { opt_plane_engine_id = 5 } } localization_key = opt_key_jet_engine_4x }
+    text = { trigger = { check_variable = { opt_plane_engine_id = 4 } } localization_key = opt_key_engine_4_4x }
+    text = { trigger = { check_variable = { opt_plane_engine_id = 3 } } localization_key = opt_key_engine_3_4x }
+    text = { localization_key = opt_key_engine_2_4x }
+}
+defined_text = {
+    name = OptPlaneGetStratSpec1
+    text = { trigger = { check_variable = { opt_strat_spec1 = 1 } } localization_key = opt_key_self_sealing_fuel_tanks_large }
+    text = { trigger = { check_variable = { opt_strat_spec1 = 2 } } localization_key = opt_key_armor_plate_large }
+    text = { localization_key = opt_key_empty }
+}
+defined_text = {
+    name = OptPlaneGetStratTurret
+    text = { trigger = { check_variable = { opt_strat_turret = 2 } } localization_key = opt_key_hmg_defense_turret_2x }
+    text = { localization_key = opt_key_lmg_defense_turret_2x }
+}
+
+defined_text = {
+    name = OptPlaneGuiModeDesc
+    text = { trigger = { check_variable = { opt_gui_mode = 1 } } localization_key = opt_plane_desc_1 }
+    text = { trigger = { check_variable = { opt_gui_mode = 2 } } localization_key = opt_plane_desc_2 }
+    text = { trigger = { check_variable = { opt_gui_mode = 4 } } localization_key = opt_plane_desc_4 }
+    text = { trigger = { check_variable = { opt_gui_mode = 5 } } localization_key = opt_plane_desc_5 }
+    text = { trigger = { check_variable = { opt_gui_mode = 6 } } localization_key = opt_plane_desc_6 }
+    text = { trigger = { check_variable = { opt_gui_mode = 7 } } localization_key = opt_plane_desc_7 }
+    text = { localization_key = opt_plane_desc_3 }
+}
+defined_text = {
+    name = OptPlaneGuiFrameStatus
+    text = { trigger = { check_variable = { opt_gui_mode = 4 } has_tech = advanced_large_airframe } localization_key = opt_plane_lframe_1944 }
+    text = { trigger = { check_variable = { opt_gui_mode = 4 } has_tech = improved_large_airframe } localization_key = opt_plane_lframe_1940 }
+    text = { trigger = { check_variable = { opt_gui_mode = 4 } has_tech = basic_large_airframe }    localization_key = opt_plane_lframe_1936 }
+    text = { trigger = { check_variable = { opt_gui_mode = 4 } } localization_key = opt_plane_lframe_none }
+    text = { trigger = { check_variable = { opt_gui_mode = 7 } has_tech = advanced_medium_airframe } localization_key = opt_plane_mframe_1944 }
+    text = { trigger = { check_variable = { opt_gui_mode = 7 } has_tech = improved_medium_airframe } localization_key = opt_plane_mframe_1940 }
+    text = { trigger = { check_variable = { opt_gui_mode = 7 } has_tech = basic_medium_airframe }    localization_key = opt_plane_mframe_1936 }
+    text = { trigger = { check_variable = { opt_gui_mode = 7 } } localization_key = opt_plane_mframe_none }
+    text = { trigger = { has_tech = advanced_small_airframe } localization_key = opt_plane_frame_1944 }
+    text = { trigger = { has_tech = improved_small_airframe } localization_key = opt_plane_frame_1940 }
+    text = { trigger = { has_tech = basic_small_airframe }    localization_key = opt_plane_frame_1936 }
+    text = { localization_key = opt_plane_frame_none }
+}
+defined_text = {
+    name = OptPlaneGuiEngineStatus
+    text = { trigger = { has_tech = jet_engines } localization_key = opt_plane_eng_jet }
+    text = { trigger = { has_tech = engines_4 }   localization_key = opt_plane_eng_4 }
+    text = { trigger = { has_tech = engines_3 }   localization_key = opt_plane_eng_3 }
+    text = { trigger = { has_tech = engines_2 }   localization_key = opt_plane_eng_2 }
+    text = { localization_key = opt_plane_eng_1 }
+}
+defined_text = {
+    name = OptPlaneGuiRubberStatus
+    text = { trigger = { has_resources_in_country = { resource = rubber amount > 15 } } localization_key = opt_plane_rubber_ok }
+    text = { localization_key = opt_plane_rubber_low }
+}
+
+defined_text = {
+    name = OptPlaneGetHFFrame
+    text = { trigger = { check_variable = { opt_plane_frame_tier = 3 } } localization_key = opt_key_medium_plane_fighter_airframe_3 }
+    text = { trigger = { check_variable = { opt_plane_frame_tier = 2 } } localization_key = opt_key_medium_plane_fighter_airframe_2 }
+    text = { localization_key = opt_key_medium_plane_fighter_airframe_1 }
+}
+defined_text = {
+    name = OptPlaneGetHFAux2Line
+    text = { trigger = { check_variable = { opt_plane_frame_tier > 1 } has_tech = aa_cannon_1 } localization_key = opt_line_aux2_cannon }
+    text = { trigger = { check_variable = { opt_plane_frame_tier > 1 } } localization_key = opt_line_aux2_hmg }
+    text = { localization_key = opt_sup_blank }
+}
+defined_text = {
+    name = OptPlaneGetHFEngine
+    text = { trigger = { check_variable = { opt_plane_engine_id = 5 } } localization_key = opt_key_jet_engine_2x }
+    text = { trigger = { check_variable = { opt_plane_engine_id = 4 } } localization_key = opt_key_engine_4_2x }
+    text = { trigger = { check_variable = { opt_plane_engine_id = 3 } } localization_key = opt_key_engine_3_2x }
+    text = { localization_key = opt_key_engine_2_2x }
+}
+defined_text = {
+    name = OptPlaneGetHFSpec1
+    text = { trigger = { check_variable = { opt_hf_spec1 = 1 } } localization_key = opt_key_self_sealing_fuel_tanks_medium }
+    text = { trigger = { check_variable = { opt_hf_spec1 = 2 } } localization_key = opt_key_armor_plate_medium }
+    text = { localization_key = opt_key_empty }
+}

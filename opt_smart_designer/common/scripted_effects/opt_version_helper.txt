@@ -1,0 +1,34 @@
+opt_bump_tank_version = {
+    if = { limit = { check_variable = { opt_tank_mode = 1 } } add_to_variable = { opt_ver_tank_1 = 1 } set_variable = { opt_cur_ver = opt_ver_tank_1 } }
+    else_if = { limit = { check_variable = { opt_tank_mode = 2 } } add_to_variable = { opt_ver_tank_2 = 1 } set_variable = { opt_cur_ver = opt_ver_tank_2 } }
+    else_if = { limit = { check_variable = { opt_tank_mode = 3 } } add_to_variable = { opt_ver_tank_3 = 1 } set_variable = { opt_cur_ver = opt_ver_tank_3 } }
+    else_if = { limit = { check_variable = { opt_tank_mode = 4 } } add_to_variable = { opt_ver_tank_4 = 1 } set_variable = { opt_cur_ver = opt_ver_tank_4 } }
+    else_if = { limit = { check_variable = { opt_tank_mode = 5 } } add_to_variable = { opt_ver_tank_5 = 1 } set_variable = { opt_cur_ver = opt_ver_tank_5 } }
+    else_if = { limit = { check_variable = { opt_tank_mode = 6 } } add_to_variable = { opt_ver_tank_6 = 1 } set_variable = { opt_cur_ver = opt_ver_tank_6 } }
+    else = { add_to_variable = { opt_ver_tank_7 = 1 } set_variable = { opt_cur_ver = opt_ver_tank_7 } }
+    set_variable = { opt_prev_ver = opt_cur_ver }
+    subtract_from_variable = { opt_prev_ver = 1 }
+}
+
+opt_bump_plane_version = {
+    if = { limit = { check_variable = { opt_plane_mode = 1 } } add_to_variable = { opt_ver_plane_1 = 1 } set_variable = { opt_cur_ver = opt_ver_plane_1 } }
+    else_if = { limit = { check_variable = { opt_plane_mode = 2 } } add_to_variable = { opt_ver_plane_2 = 1 } set_variable = { opt_cur_ver = opt_ver_plane_2 } }
+    else_if = { limit = { check_variable = { opt_plane_mode = 3 } } add_to_variable = { opt_ver_plane_3 = 1 } set_variable = { opt_cur_ver = opt_ver_plane_3 } }
+    else_if = { limit = { check_variable = { opt_plane_mode = 4 } } add_to_variable = { opt_ver_plane_4 = 1 } set_variable = { opt_cur_ver = opt_ver_plane_4 } }
+    else_if = { limit = { check_variable = { opt_plane_mode = 5 } } add_to_variable = { opt_ver_plane_5 = 1 } set_variable = { opt_cur_ver = opt_ver_plane_5 } }
+    else_if = { limit = { check_variable = { opt_plane_mode = 6 } } add_to_variable = { opt_ver_plane_6 = 1 } set_variable = { opt_cur_ver = opt_ver_plane_6 } }
+    else = { add_to_variable = { opt_ver_plane_7 = 1 } set_variable = { opt_cur_ver = opt_ver_plane_7 } }
+    set_variable = { opt_prev_ver = opt_cur_ver }
+    subtract_from_variable = { opt_prev_ver = 1 }
+}
+
+opt_bump_ship_version = {
+    if = { limit = { check_variable = { opt_ship_mode = 1 } } add_to_variable = { opt_ver_ship_1 = 1 } set_variable = { opt_cur_ver = opt_ver_ship_1 } }
+    else_if = { limit = { check_variable = { opt_ship_mode = 2 } } add_to_variable = { opt_ver_ship_2 = 1 } set_variable = { opt_cur_ver = opt_ver_ship_2 } }
+    else_if = { limit = { check_variable = { opt_ship_mode = 3 } } add_to_variable = { opt_ver_ship_3 = 1 } set_variable = { opt_cur_ver = opt_ver_ship_3 } }
+    else_if = { limit = { check_variable = { opt_ship_mode = 4 } } add_to_variable = { opt_ver_ship_4 = 1 } set_variable = { opt_cur_ver = opt_ver_ship_4 } }
+    else_if = { limit = { check_variable = { opt_ship_mode = 5 } } add_to_variable = { opt_ver_ship_5 = 1 } set_variable = { opt_cur_ver = opt_ver_ship_5 } }
+    else = { add_to_variable = { opt_ver_ship_6 = 1 } set_variable = { opt_cur_ver = opt_ver_ship_6 } }
+    set_variable = { opt_prev_ver = opt_cur_ver }
+    subtract_from_variable = { opt_prev_ver = 1 }
+}

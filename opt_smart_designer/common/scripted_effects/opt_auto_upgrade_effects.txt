@@ -1,0 +1,82 @@
+# 计算当前国家关键科技签名（科技/学说/战区变动时自动触发追踪兵种的升级）
+opt_compute_global_tech_sig = {
+    set_temp_variable = { opt_sig_tank = opt_gui_era }
+    multiply_temp_variable = { opt_sig_tank = 100 }
+    if = { limit = { has_tech = advanced_medium_tank_chassis } add_to_temp_variable = { opt_sig_tank = 30 } }
+    else_if = { limit = { has_tech = improved_medium_tank_chassis } add_to_temp_variable = { opt_sig_tank = 20 } }
+    if = { limit = { has_tech = artillery4 } add_to_temp_variable = { opt_sig_tank = 9 } }
+    else_if = { limit = { has_tech = artillery1 } add_to_temp_variable = { opt_sig_tank = 5 } }
+    if = { limit = { has_tech = armor_tech_3 } add_to_temp_variable = { opt_sig_tank = 3 } }
+    if = { limit = { has_tech = improved_radio } add_to_temp_variable = { opt_sig_tank = 2 } }
+    add_to_temp_variable = { opt_sig_tank = opt_gui_theater }
+
+    set_temp_variable = { opt_sig_plane = opt_gui_era }
+    multiply_temp_variable = { opt_sig_plane = 100 }
+    if = { limit = { has_tech = advanced_small_airframe } add_to_temp_variable = { opt_sig_plane = 30 } }
+    else_if = { limit = { has_tech = improved_small_airframe } add_to_temp_variable = { opt_sig_plane = 20 } }
+    if = { limit = { has_tech = jet_engines } add_to_temp_variable = { opt_sig_plane = 15 } }
+    else_if = { limit = { has_tech = engines_4 } add_to_temp_variable = { opt_sig_plane = 12 } }
+    else_if = { limit = { has_tech = engines_3 } add_to_temp_variable = { opt_sig_plane = 8 } }
+    if = { limit = { has_tech = aa_hmg } add_to_temp_variable = { opt_sig_plane = 4 } }
+    if = { limit = { has_tech = survivability_studies } add_to_temp_variable = { opt_sig_plane = 2 } }
+    if = { limit = { has_tech = range_improvements } add_to_temp_variable = { opt_sig_plane = 1 } }
+    add_to_temp_variable = { opt_sig_plane = opt_gui_theater }
+
+    set_temp_variable = { opt_sig_ship = opt_gui_era }
+    multiply_temp_variable = { opt_sig_ship = 100 }
+    if = { limit = { has_tech = advanced_ship_hull_cruiser } add_to_temp_variable = { opt_sig_ship = 30 } }
+    else_if = { limit = { has_tech = improved_ship_hull_cruiser } add_to_temp_variable = { opt_sig_ship = 20 } }
+    if = { limit = { has_tech = improved_sonar } add_to_temp_variable = { opt_sig_ship = 8 } }
+    if = { limit = { has_tech = decimetric_radar } add_to_temp_variable = { opt_sig_ship = 4 } }
+    if = { limit = { has_tech = basic_submarine_snorkel } add_to_temp_variable = { opt_sig_ship = 2 } }
+    add_to_temp_variable = { opt_sig_ship = opt_gui_theater }
+}
+
+opt_run_monthly_auto_upgrade = {
+    opt_compute_global_tech_sig = yes
+
+    # 1. 自动升级已追踪的坦克（当坦克科技签名变化时）
+    if = {
+        limit = {
+            has_dlc = "No Step Back"
+            NOT = { check_variable = { opt_last_auto_tank_sig = opt_sig_tank } }
+        }
+        set_variable = { opt_last_auto_tank_sig = opt_sig_tank }
+        if = { limit = { has_country_flag = opt_track_tank_1 has_tech = basic_light_tank_chassis }  set_variable = { opt_tank_mode = 1 } opt_assemble_tank_v4 = yes }
+        if = { limit = { has_country_flag = opt_track_tank_2 has_tech = basic_medium_tank_chassis } set_variable = { opt_tank_mode = 2 } opt_assemble_tank_v4 = yes }
+        if = { limit = { has_country_flag = opt_track_tank_3 has_tech = basic_heavy_tank_chassis }  set_variable = { opt_tank_mode = 3 } opt_assemble_tank_v4 = yes }
+        if = { limit = { has_country_flag = opt_track_tank_4 has_tech = basic_medium_tank_chassis has_tech = tech_engineers2 } set_variable = { opt_tank_mode = 4 } opt_assemble_tank_v4 = yes }
+        if = { limit = { has_country_flag = opt_track_tank_6 has_tech = basic_medium_tank_chassis has_tech = artillery1 } set_variable = { opt_tank_mode = 6 } opt_assemble_tank_v4 = yes }
+    }
+
+    # 2. 自动升级已追踪的飞机
+    if = {
+        limit = {
+            has_dlc = "By Blood Alone"
+            NOT = { check_variable = { opt_last_auto_plane_sig = opt_sig_plane } }
+        }
+        set_variable = { opt_last_auto_plane_sig = opt_sig_plane }
+        if = { limit = { has_country_flag = opt_track_plane_1 has_tech = basic_small_airframe } set_variable = { opt_plane_mode = 1 } opt_assemble_plane = yes }
+        if = { limit = { has_country_flag = opt_track_plane_2 has_tech = basic_small_airframe } set_variable = { opt_plane_mode = 2 } opt_assemble_plane = yes }
+        if = { limit = { has_country_flag = opt_track_plane_3 has_tech = basic_small_airframe has_tech = air_torpedoe_1 } set_variable = { opt_plane_mode = 3 } opt_assemble_plane = yes }
+        if = { limit = { has_country_flag = opt_track_plane_4 has_tech = basic_large_airframe } set_variable = { opt_plane_mode = 4 } opt_assemble_plane = yes }
+        if = { limit = { has_country_flag = opt_track_plane_5 has_tech = basic_small_airframe } set_variable = { opt_plane_mode = 5 } opt_assemble_plane = yes }
+        if = { limit = { has_country_flag = opt_track_plane_6 has_tech = basic_small_airframe has_tech = air_torpedoe_1 } set_variable = { opt_plane_mode = 6 } opt_assemble_plane = yes }
+        if = { limit = { has_country_flag = opt_track_plane_7 has_tech = basic_medium_airframe } set_variable = { opt_plane_mode = 7 } opt_assemble_plane = yes }
+    }
+
+    # 3. 自动升级已追踪的船只
+    if = {
+        limit = {
+            has_dlc = "Man the Guns"
+            NOT = { check_variable = { opt_last_auto_ship_sig = opt_sig_ship } }
+        }
+        set_variable = { opt_last_auto_ship_sig = opt_sig_ship }
+        if = { limit = { has_country_flag = opt_track_ship_1 has_tech = early_ship_hull_light }     set_variable = { opt_ship_mode = 1 } opt_assemble_ship = yes }
+        if = { limit = { has_country_flag = opt_track_ship_2 has_tech = early_ship_hull_light }     set_variable = { opt_ship_mode = 2 } opt_assemble_ship = yes }
+        if = { limit = { has_country_flag = opt_track_ship_3 has_tech = early_ship_hull_cruiser }   set_variable = { opt_ship_mode = 3 } opt_assemble_ship = yes }
+        if = { limit = { has_country_flag = opt_track_ship_4 has_tech = early_ship_hull_submarine } set_variable = { opt_ship_mode = 4 } opt_assemble_ship = yes }
+        if = { limit = { has_country_flag = opt_track_ship_5 has_tech = early_ship_hull_heavy }     set_variable = { opt_ship_mode = 5 } opt_assemble_ship = yes }
+        if = { limit = { has_country_flag = opt_track_ship_6 has_tech = early_ship_hull_carrier }   set_variable = { opt_ship_mode = 6 } opt_assemble_ship = yes }
+    }
+}

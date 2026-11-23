@@ -1,0 +1,109 @@
+defined_text = {
+    name = OptDivGetName
+    text = { trigger = { check_variable = { opt_div_mode = 1 } } localization_key = opt_div_name_inf }
+    text = { trigger = { check_variable = { opt_div_mode = 2 } } localization_key = opt_div_name_inf_arty }
+    text = { trigger = { check_variable = { opt_div_mode = 3 } } localization_key = opt_div_name_light_armor }
+    text = { trigger = { check_variable = { opt_div_mode = 5 } } localization_key = opt_div_name_space_marine }
+    text = { trigger = { check_variable = { opt_div_mode = 6 } } localization_key = opt_div_name_mtn }
+    text = { trigger = { check_variable = { opt_div_mode = 7 } } localization_key = opt_div_name_mar }
+    text = { trigger = { check_variable = { opt_div_mode = 8 } } localization_key = opt_div_name_mp }
+    text = { trigger = { opt_is_mobile_warfare = yes } localization_key = opt_div_name_armor_mw }
+    text = { localization_key = opt_div_name_armor_std }
+}
+defined_text = {
+    name = OptDivGetMobInf
+    text = { trigger = { check_variable = { opt_mob_inf_type = 2 } } localization_key = opt_key_mechanized }
+    text = { localization_key = opt_key_motorized }
+}
+defined_text = {
+    name = OptDivGetSup0
+    text = { trigger = { check_variable = { opt_sup_0 = 10 } } localization_key = opt_sup0_mp }
+    text = { trigger = { check_variable = { opt_sup_0 = 9 } } localization_key = opt_sup0_lrec }
+    text = { trigger = { check_variable = { opt_sup_0 = 8 } } localization_key = opt_sup0_flm }
+    text = { trigger = { check_variable = { opt_sup_0 = 1 } } localization_key = opt_sup0_eng }
+    text = { trigger = { check_variable = { opt_sup_0 = 2 } } localization_key = opt_sup0_art }
+    text = { trigger = { check_variable = { opt_sup_0 = 3 } } localization_key = opt_sup0_aa }
+    text = { trigger = { check_variable = { opt_sup_0 = 4 } } localization_key = opt_sup0_rec }
+    text = { trigger = { check_variable = { opt_sup_0 = 5 } } localization_key = opt_sup0_log }
+    text = { trigger = { check_variable = { opt_sup_0 = 6 } } localization_key = opt_sup0_mnt }
+    text = { trigger = { check_variable = { opt_sup_0 = 7 } } localization_key = opt_sup0_sig }
+    text = { localization_key = opt_sup_blank }
+}
+defined_text = {
+    name = OptDivGetSup1
+    text = { trigger = { check_variable = { opt_sup_1 = 10 } } localization_key = opt_sup1_mp }
+    text = { trigger = { check_variable = { opt_sup_1 = 9 } } localization_key = opt_sup1_lrec }
+    text = { trigger = { check_variable = { opt_sup_1 = 8 } } localization_key = opt_sup1_flm }
+    text = { trigger = { check_variable = { opt_sup_1 = 1 } } localization_key = opt_sup1_eng }
+    text = { trigger = { check_variable = { opt_sup_1 = 2 } } localization_key = opt_sup1_art }
+    text = { trigger = { check_variable = { opt_sup_1 = 3 } } localization_key = opt_sup1_aa }
+    text = { trigger = { check_variable = { opt_sup_1 = 4 } } localization_key = opt_sup1_rec }
+    text = { trigger = { check_variable = { opt_sup_1 = 5 } } localization_key = opt_sup1_log }
+    text = { trigger = { check_variable = { opt_sup_1 = 6 } } localization_key = opt_sup1_mnt }
+    text = { trigger = { check_variable = { opt_sup_1 = 7 } } localization_key = opt_sup1_sig }
+    text = { localization_key = opt_sup_blank }
+}
+defined_text = {
+    name = OptDivGetSup2
+    text = { trigger = { check_variable = { opt_sup_2 = 10 } } localization_key = opt_sup2_mp }
+    text = { trigger = { check_variable = { opt_sup_2 = 9 } } localization_key = opt_sup2_lrec }
+    text = { trigger = { check_variable = { opt_sup_2 = 8 } } localization_key = opt_sup2_flm }
+    text = { trigger = { check_variable = { opt_sup_2 = 1 } } localization_key = opt_sup2_eng }
+    text = { trigger = { check_variable = { opt_sup_2 = 2 } } localization_key = opt_sup2_art }
+    text = { trigger = { check_variable = { opt_sup_2 = 3 } } localization_key = opt_sup2_aa }
+    text = { trigger = { check_variable = { opt_sup_2 = 4 } } localization_key = opt_sup2_rec }
+    text = { trigger = { check_variable = { opt_sup_2 = 5 } } localization_key = opt_sup2_log }
+    text = { trigger = { check_variable = { opt_sup_2 = 6 } } localization_key = opt_sup2_mnt }
+    text = { trigger = { check_variable = { opt_sup_2 = 7 } } localization_key = opt_sup2_sig }
+    text = { localization_key = opt_sup_blank }
+}
+defined_text = {
+    name = OptDivGetSup3
+    text = { trigger = { check_variable = { opt_sup_3 = 10 } } localization_key = opt_sup3_mp }
+    text = { trigger = { check_variable = { opt_sup_3 = 9 } } localization_key = opt_sup3_lrec }
+    text = { trigger = { check_variable = { opt_sup_3 = 8 } } localization_key = opt_sup3_flm }
+    text = { trigger = { check_variable = { opt_sup_3 = 1 } } localization_key = opt_sup3_eng }
+    text = { trigger = { check_variable = { opt_sup_3 = 2 } } localization_key = opt_sup3_art }
+    text = { trigger = { check_variable = { opt_sup_3 = 3 } } localization_key = opt_sup3_aa }
+    text = { trigger = { check_variable = { opt_sup_3 = 4 } } localization_key = opt_sup3_rec }
+    text = { trigger = { check_variable = { opt_sup_3 = 5 } } localization_key = opt_sup3_log }
+    text = { trigger = { check_variable = { opt_sup_3 = 6 } } localization_key = opt_sup3_mnt }
+    text = { trigger = { check_variable = { opt_sup_3 = 7 } } localization_key = opt_sup3_sig }
+    text = { localization_key = opt_sup_blank }
+}
+defined_text = {
+    name = OptDivGetSup4
+    text = { trigger = { check_variable = { opt_sup_4 = 10 } } localization_key = opt_sup4_mp }
+    text = { trigger = { check_variable = { opt_sup_4 = 9 } } localization_key = opt_sup4_lrec }
+    text = { trigger = { check_variable = { opt_sup_4 = 8 } } localization_key = opt_sup4_flm }
+    text = { trigger = { check_variable = { opt_sup_4 = 1 } } localization_key = opt_sup4_eng }
+    text = { trigger = { check_variable = { opt_sup_4 = 2 } } localization_key = opt_sup4_art }
+    text = { trigger = { check_variable = { opt_sup_4 = 3 } } localization_key = opt_sup4_aa }
+    text = { trigger = { check_variable = { opt_sup_4 = 4 } } localization_key = opt_sup4_rec }
+    text = { trigger = { check_variable = { opt_sup_4 = 5 } } localization_key = opt_sup4_log }
+    text = { trigger = { check_variable = { opt_sup_4 = 6 } } localization_key = opt_sup4_mnt }
+    text = { trigger = { check_variable = { opt_sup_4 = 7 } } localization_key = opt_sup4_sig }
+    text = { localization_key = opt_sup_blank }
+}
+defined_text = {
+    name = OptDivGuiModeDesc
+    text = { trigger = { check_variable = { opt_gui_mode = 1 } } localization_key = opt_div_desc_1 }
+    text = { trigger = { check_variable = { opt_gui_mode = 2 } } localization_key = opt_div_desc_2 }
+    text = { trigger = { check_variable = { opt_gui_mode = 3 } } localization_key = opt_div_desc_3 }
+    text = { trigger = { check_variable = { opt_gui_mode = 4 } } localization_key = opt_div_desc_4 }
+    text = { trigger = { check_variable = { opt_gui_mode = 5 } } localization_key = opt_div_desc_5 }
+    text = { trigger = { check_variable = { opt_gui_mode = 6 } } localization_key = opt_div_desc_6 }
+    text = { trigger = { check_variable = { opt_gui_mode = 7 } } localization_key = opt_div_desc_7 }
+    text = { localization_key = opt_div_desc_8 }
+}
+defined_text = {
+    name = OptDivGuiArmorRatio
+    text = { trigger = { opt_is_mobile_warfare = yes } localization_key = opt_div_ratio_mw }
+    text = { localization_key = opt_div_ratio_std }
+}
+defined_text = {
+    name = OptDivGuiMobInfStatus
+    text = { trigger = { has_tech = mechanised_infantry } localization_key = opt_div_mob_mech }
+    text = { trigger = { has_tech = motorised_infantry }  localization_key = opt_div_mob_mot }
+    text = { localization_key = opt_div_mob_none }
+}

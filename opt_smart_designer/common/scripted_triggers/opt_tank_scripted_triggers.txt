@@ -1,0 +1,237 @@
+# --- 陆军学说判定（HOI4 1.17+ 使用 has_doctrine；旧版请改为 has_tech）---
+opt_is_mobile_warfare = {
+    has_doctrine = mobile_warfare
+}
+opt_is_superior_firepower = {
+    has_doctrine = superior_firepower
+}
+opt_is_grand_battleplan = {
+    has_doctrine = grand_battleplan
+}
+opt_is_mass_assault = {
+    has_doctrine = mass_assault
+}
+
+# --- 坦克 MIO 可靠性补偿 ---
+opt_has_tank_mio_reliability_bonus = {
+    has_dlc = "Arms Against Tyranny"
+    any_military_industrial_organization = {
+        OR = {
+            is_mio_trait_completed = generic_mio_trait_all_round_reliability
+            is_mio_trait_completed = generic_mio_trait_simplified_turret_design
+            is_mio_trait_completed = generic_mio_trait_standardized_components
+            has_mio_size > 4
+        }
+    }
+}
+
+# ==================================================
+# 内阁部长扫描（区分已上位 vs 未上位，全国家通用）
+# ==================================================
+
+# 【陆军 - 机动战/装甲系】
+opt_has_hired_mw_advisor = {
+    any_character = {
+        is_hired_as_advisor = yes
+        OR = {
+            has_trait = mobile_warfare_expert
+            has_trait = blitzkrieg_theorist
+            has_trait = army_armored_3
+            has_trait = army_armored_2
+        }
+    }
+}
+opt_has_unhired_mw_advisor = {
+    any_character = {
+        is_hired_as_advisor = no
+        OR = { has_advisor_role = theorist has_advisor_role = high_command has_advisor_role = army_chief }
+        OR = {
+            has_trait = mobile_warfare_expert
+            has_trait = blitzkrieg_theorist
+            has_trait = army_armored_3
+            has_trait = army_armored_2
+        }
+    }
+}
+
+# 【陆军 - 优势火力/炮兵系】
+opt_has_hired_sf_advisor = {
+    any_character = {
+        is_hired_as_advisor = yes
+        OR = {
+            has_trait = superior_firepower_expert
+            has_trait = army_artillery_3
+            has_trait = army_artillery_2
+        }
+    }
+}
+opt_has_unhired_sf_advisor = {
+    any_character = {
+        is_hired_as_advisor = no
+        OR = { has_advisor_role = theorist has_advisor_role = high_command has_advisor_role = army_chief }
+        OR = {
+            has_trait = superior_firepower_expert
+            has_trait = army_artillery_3
+            has_trait = army_artillery_2
+        }
+    }
+}
+
+# 【陆军 - 决战计划/步兵防御系】
+opt_has_hired_gbp_advisor = {
+    any_character = {
+        is_hired_as_advisor = yes
+        OR = {
+            has_trait = grand_battleplan_expert
+            has_trait = army_infantry_3
+            has_trait = army_entrenchment_3
+        }
+    }
+}
+opt_has_unhired_gbp_advisor = {
+    any_character = {
+        is_hired_as_advisor = no
+        OR = { has_advisor_role = theorist has_advisor_role = high_command has_advisor_role = army_chief }
+        OR = {
+            has_trait = grand_battleplan_expert
+            has_trait = army_infantry_3
+            has_trait = army_entrenchment_3
+        }
+    }
+}
+
+# 【陆军 - 人海突击系】
+opt_has_hired_ma_advisor = {
+    any_character = {
+        is_hired_as_advisor = yes
+        OR = {
+            has_trait = mass_assault_expert
+            has_trait = army_regrouping_3
+        }
+    }
+}
+opt_has_unhired_ma_advisor = {
+    any_character = {
+        is_hired_as_advisor = no
+        OR = { has_advisor_role = theorist has_advisor_role = high_command has_advisor_role = army_chief }
+        OR = {
+            has_trait = mass_assault_expert
+            has_trait = army_regrouping_3
+        }
+    }
+}
+
+# 【空军 - 战场支援 / CAS 系】
+opt_has_hired_air_bs_advisor = {
+    any_character = {
+        is_hired_as_advisor = yes
+        OR = {
+            has_trait = dive_bomber
+            has_trait = air_close_air_support_3
+            has_trait = air_close_air_support_2
+        }
+    }
+}
+opt_has_unhired_air_bs_advisor = {
+    any_character = {
+        is_hired_as_advisor = no
+        OR = { has_advisor_role = theorist has_advisor_role = high_command has_advisor_role = air_chief }
+        OR = {
+            has_trait = dive_bomber
+            has_trait = air_close_air_support_3
+            has_trait = air_close_air_support_2
+        }
+    }
+}
+
+# 【空军 - 战略破坏 / 制空系】
+opt_has_hired_air_sd_advisor = {
+    any_character = {
+        is_hired_as_advisor = yes
+        OR = {
+            has_trait = victory_through_airpower
+            has_trait = air_air_superiority_3
+            has_trait = air_strategic_bombing_3
+        }
+    }
+}
+opt_has_unhired_air_sd_advisor = {
+    any_character = {
+        is_hired_as_advisor = no
+        OR = { has_advisor_role = theorist has_advisor_role = high_command has_advisor_role = air_chief }
+        OR = {
+            has_trait = victory_through_airpower
+            has_trait = air_air_superiority_3
+            has_trait = air_strategic_bombing_3
+        }
+    }
+}
+
+# 【海军 - 贸易破交 / 潜艇系】
+opt_has_hired_navy_ti_advisor = {
+    any_character = {
+        is_hired_as_advisor = yes
+        OR = {
+            has_trait = submarine_specialist
+            has_trait = navy_submarine_3
+            has_trait = navy_submarine_2
+        }
+    }
+}
+opt_has_unhired_navy_ti_advisor = {
+    any_character = {
+        is_hired_as_advisor = no
+        OR = { has_advisor_role = theorist has_advisor_role = high_command has_advisor_role = navy_chief }
+        OR = {
+            has_trait = submarine_specialist
+            has_trait = navy_submarine_3
+            has_trait = navy_submarine_2
+        }
+    }
+}
+
+# 【海军 - 基地打击 / 航母系】
+opt_has_hired_navy_bs_advisor = {
+    any_character = {
+        is_hired_as_advisor = yes
+        OR = {
+            has_trait = naval_aviation_pioneer
+            has_trait = navy_carrier_3
+            has_trait = navy_carrier_2
+        }
+    }
+}
+opt_has_unhired_navy_bs_advisor = {
+    any_character = {
+        is_hired_as_advisor = no
+        OR = { has_advisor_role = theorist has_advisor_role = high_command has_advisor_role = navy_chief }
+        OR = {
+            has_trait = naval_aviation_pioneer
+            has_trait = navy_carrier_3
+            has_trait = navy_carrier_2
+        }
+    }
+}
+
+# 【海军 - 存在舰队 / 主力舰系】
+opt_has_hired_navy_fib_advisor = {
+    any_character = {
+        is_hired_as_advisor = yes
+        OR = {
+            has_trait = grand_fleet_proponent
+            has_trait = navy_capital_ship_3
+            has_trait = navy_capital_ship_2
+        }
+    }
+}
+opt_has_unhired_navy_fib_advisor = {
+    any_character = {
+        is_hired_as_advisor = no
+        OR = { has_advisor_role = theorist has_advisor_role = high_command has_advisor_role = navy_chief }
+        OR = {
+            has_trait = grand_fleet_proponent
+            has_trait = navy_capital_ship_3
+            has_trait = navy_capital_ship_2
+        }
+    }
+}

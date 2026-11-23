@@ -1,0 +1,152 @@
+# ==================================================
+# 国家战略学说与部长（含未上位）实时量化评分引擎
+# ==================================================
+opt_recalculate_strategy = {
+    # ---------- 1. 陆军学说打分 ----------
+    # 1=机动战(MW), 2=优势火力(SF), 3=决战计划(GBP), 4=人海突击(MA)
+    set_variable = { opt_score_land_mw  = 40 }
+    set_variable = { opt_score_land_sf  = 55 } # 单人模式优势火力基线泛用性最高
+    set_variable = { opt_score_land_gbp = 45 }
+    set_variable = { opt_score_land_ma  = 30 }
+
+    # 工业规模画像
+    if = {
+        limit = { num_of_military_factories > 29 }
+        add_to_variable = { opt_score_land_mw = 20 }
+        add_to_variable = { opt_score_land_sf = 15 }
+    }
+    else_if = {
+        limit = { num_of_military_factories < 12 }
+        add_to_variable = { opt_score_land_gbp = 25 } # 缺军工小国：决战计划省装备
+        subtract_from_variable = { opt_score_land_mw = 15 }
+    }
+
+    # 人力画像
+    if = {
+        limit = { has_manpower > 1500000 }
+        add_to_variable = { opt_score_land_ma = 30 }
+        add_to_variable = { opt_score_land_sf = 10 }
+    }
+    else_if = {
+        limit = { has_manpower < 300000 }
+        add_to_variable = { opt_score_land_mw = 10 }
+        add_to_variable = { opt_score_land_sf = 10 }
+        subtract_from_variable = { opt_score_land_ma = 20 }
+    }
+
+    # 石油与装甲将领画像
+    if = {
+        limit = { has_resources_in_country = { resource = oil amount > 20 } }
+        add_to_variable = { opt_score_land_mw = 10 }
+    }
+    if = {
+        limit = { any_unit_leader = { has_trait = panzer_leader } }
+        add_to_variable = { opt_score_land_mw = 12 }
+    }
+
+    # 内阁部长加分（已上位 +25，未上位 +18 照样计入战略潜力）
+    if = { limit = { opt_has_hired_mw_advisor = yes }    add_to_variable = { opt_score_land_mw = 25 } }
+    else_if = { limit = { opt_has_unhired_mw_advisor = yes } add_to_variable = { opt_score_land_mw = 18 } }
+
+    if = { limit = { opt_has_hired_sf_advisor = yes }    add_to_variable = { opt_score_land_sf = 25 } }
+    else_if = { limit = { opt_has_unhired_sf_advisor = yes } add_to_variable = { opt_score_land_sf = 18 } }
+
+    if = { limit = { opt_has_hired_gbp_advisor = yes }   add_to_variable = { opt_score_land_gbp = 25 } }
+    else_if = { limit = { opt_has_unhired_gbp_advisor = yes } add_to_variable = { opt_score_land_gbp = 18 } }
+
+    if = { limit = { opt_has_hired_ma_advisor = yes }    add_to_variable = { opt_score_land_ma = 25 } }
+    else_if = { limit = { opt_has_unhired_ma_advisor = yes } add_to_variable = { opt_score_land_ma = 18 } }
+
+    # 选出陆军最高分学说
+    set_variable = { opt_best_land_doc = 2 }
+    set_temp_variable = { opt_max_land = opt_score_land_sf }
+    if = {
+        limit = { check_variable = { opt_score_land_mw > opt_max_land } }
+        set_variable = { opt_best_land_doc = 1 }
+        set_temp_variable = { opt_max_land = opt_score_land_mw }
+    }
+    if = {
+        limit = { check_variable = { opt_score_land_gbp > opt_max_land } }
+        set_variable = { opt_best_land_doc = 3 }
+        set_temp_variable = { opt_max_land = opt_score_land_gbp }
+    }
+    if = {
+        limit = { check_variable = { opt_score_land_ma > opt_max_land } }
+        set_variable = { opt_best_land_doc = 4 }
+        set_temp_variable = { opt_max_land = opt_score_land_ma }
+    }
+
+    # ---------- 2. 空军学说打分 ----------
+    # 1=战场支援(BS), 2=战略破坏(SD), 3=战术打击(OI)
+    set_variable = { opt_score_air_bs = 55 } # 单人对地 CAS 收益极高
+    set_variable = { opt_score_air_sd = 45 }
+    set_variable = { opt_score_air_oi = 40 }
+
+    if = {
+        limit = { num_of_military_factories > 35 has_resources_in_country = { resource = rubber amount > 15 } }
+        add_to_variable = { opt_score_air_sd = 20 }
+    }
+    if = {
+        limit = { check_variable = { opt_gui_theater > 1 } }
+        add_to_variable = { opt_score_air_oi = 15 } # 远距大空区利好战术轰炸/远航
+        add_to_variable = { opt_score_air_sd = 10 }
+    }
+
+    if = { limit = { opt_has_hired_air_bs_advisor = yes }    add_to_variable = { opt_score_air_bs = 25 } }
+    else_if = { limit = { opt_has_unhired_air_bs_advisor = yes } add_to_variable = { opt_score_air_bs = 18 } }
+
+    if = { limit = { opt_has_hired_air_sd_advisor = yes }    add_to_variable = { opt_score_air_sd = 25 } }
+    else_if = { limit = { opt_has_unhired_air_sd_advisor = yes } add_to_variable = { opt_score_air_sd = 18 } }
+
+    set_variable = { opt_best_air_doc = 1 }
+    set_temp_variable = { opt_max_air = opt_score_air_bs }
+    if = {
+        limit = { check_variable = { opt_score_air_sd > opt_max_air } }
+        set_variable = { opt_best_air_doc = 2 }
+        set_temp_variable = { opt_max_air = opt_score_air_sd }
+    }
+    if = {
+        limit = { check_variable = { opt_score_air_oi > opt_max_air } }
+        set_variable = { opt_best_air_doc = 3 }
+        set_temp_variable = { opt_max_air = opt_score_air_oi }
+    }
+
+    # ---------- 3. 海军学说打分 ----------
+    # 1=贸易破交(TI), 2=基地打击(BS), 3=存在舰队(FIB)
+    set_variable = { opt_score_navy_ti  = 50 }
+    set_variable = { opt_score_navy_bs  = 40 }
+    set_variable = { opt_score_navy_fib = 40 }
+
+    if = {
+        limit = { num_of_naval_dockyards < 12 }
+        add_to_variable = { opt_score_navy_ti = 25 } # 船坞少优先潜艇破交
+    }
+    if = { limit = { check_variable = { opt_gui_theater = 4 } } add_to_variable = { opt_score_navy_bs = 18 } }
+    else_if = {
+        limit = { num_of_naval_dockyards > 24 }
+        add_to_variable = { opt_score_navy_bs = 20 }
+        add_to_variable = { opt_score_navy_fib = 15 }
+    }
+
+    if = { limit = { opt_has_hired_navy_ti_advisor = yes }     add_to_variable = { opt_score_navy_ti = 25 } }
+    else_if = { limit = { opt_has_unhired_navy_ti_advisor = yes } add_to_variable = { opt_score_navy_ti = 18 } }
+
+    if = { limit = { opt_has_hired_navy_bs_advisor = yes }     add_to_variable = { opt_score_navy_bs = 25 } }
+    else_if = { limit = { opt_has_unhired_navy_bs_advisor = yes } add_to_variable = { opt_score_navy_bs = 18 } }
+
+    if = { limit = { opt_has_hired_navy_fib_advisor = yes }    add_to_variable = { opt_score_navy_fib = 25 } }
+    else_if = { limit = { opt_has_unhired_navy_fib_advisor = yes } add_to_variable = { opt_score_navy_fib = 18 } }
+
+    set_variable = { opt_best_navy_doc = 1 }
+    set_temp_variable = { opt_max_navy = opt_score_navy_ti }
+    if = {
+        limit = { check_variable = { opt_score_navy_bs > opt_max_navy } }
+        set_variable = { opt_best_navy_doc = 2 }
+        set_temp_variable = { opt_max_navy = opt_score_navy_bs }
+    }
+    if = {
+        limit = { check_variable = { opt_score_navy_fib > opt_max_navy } }
+        set_variable = { opt_best_navy_doc = 3 }
+        set_temp_variable = { opt_max_navy = opt_score_navy_fib }
+    }
+}

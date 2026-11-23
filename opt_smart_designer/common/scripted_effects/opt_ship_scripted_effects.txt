@@ -1,0 +1,312 @@
+opt_assemble_ship = {
+    opt_ship_scan_shared_techs = yes
+    opt_bump_ship_version = yes
+
+    # ---------- 1. 护航反潜驱逐舰 (1922~1944) ----------
+    if = {
+        limit = { check_variable = { opt_ship_mode = 1 } }
+        if = { limit = { check_variable = { opt_gui_era > 2 } has_tech = advanced_ship_hull_light } set_variable = { opt_ship_hull_tier = 4 } }
+        else_if = { limit = { check_variable = { opt_gui_era > 1 } has_tech = improved_ship_hull_light } set_variable = { opt_ship_hull_tier = 3 } }
+        else_if = { limit = { has_tech = basic_ship_hull_light } set_variable = { opt_ship_hull_tier = 2 } }
+        else = { set_variable = { opt_ship_hull_tier = 1 } }
+
+        meta_effect = {
+            text = {
+                create_equipment_variant = {
+                    name = "[SHIP_NAME] [VER]"
+                    type = [DD_HULL]
+                    parent_version = [PREV_VER]
+                    modules = {
+                        fixed_ship_battery_slot = ship_light_battery_1
+                        fixed_ship_anti_air_slot = [SHIP_AA]
+                        fixed_ship_fire_control_system_slot = [SHIP_FCS]
+                        fixed_ship_radar_slot = [SHIP_SONAR]
+                        fixed_ship_engine_slot = [DD_ENGINE]
+                        fixed_ship_torpedo_slot = empty
+                        mid_1_custom_slot = [DEPTH_CHARGE]
+                        rear_1_custom_slot = [DEPTH_CHARGE]
+                    }
+                }
+            }
+            SHIP_NAME = "[OptShipGetName]"
+            VER = "[OptGetRomanVer]"
+            PREV_VER = "[?opt_prev_ver|0]"
+            DD_HULL = "[OptShipGetDDHull]"
+            SHIP_AA = "[OptShipGetAA]"
+            SHIP_FCS = "[OptShipGetFCS]"
+            SHIP_SONAR = "[OptShipGetSonar]"
+            DD_ENGINE = "[OptShipGetDDEngine]"
+            DEPTH_CHARGE = "[OptShipGetDepthCharge]"
+        }
+    }
+
+    # ---------- 2. 鱼雷雷击驱逐舰 (Torpedo Strike DD，轻巡洗完屏卫后秒杀敌方主力舰) ----------
+    else_if = {
+        limit = { check_variable = { opt_ship_mode = 2 } }
+        if = { limit = { check_variable = { opt_gui_era > 2 } has_tech = advanced_ship_hull_light } set_variable = { opt_ship_hull_tier = 4 } }
+        else_if = { limit = { check_variable = { opt_gui_era > 1 } has_tech = improved_ship_hull_light } set_variable = { opt_ship_hull_tier = 3 } }
+        else_if = { limit = { has_tech = basic_ship_hull_light } set_variable = { opt_ship_hull_tier = 2 } }
+        else = { set_variable = { opt_ship_hull_tier = 1 } }
+
+        if = { limit = { has_tech = advanced_ship_torpedo_launcher } set_variable = { opt_dd_torp_lvl = 4 } }
+        else_if = { limit = { has_tech = improved_ship_torpedo_launcher } set_variable = { opt_dd_torp_lvl = 3 } }
+        else_if = { limit = { has_tech = basic_torpedo } set_variable = { opt_dd_torp_lvl = 2 } }
+        else = { set_variable = { opt_dd_torp_lvl = 1 } }
+
+        meta_effect = {
+            text = {
+                create_equipment_variant = {
+                    name = "[SHIP_NAME] [VER]"
+                    type = [DD_HULL]
+                    parent_version = [PREV_VER]
+                    modules = {
+                        fixed_ship_battery_slot = ship_light_battery_1
+                        fixed_ship_anti_air_slot = [SHIP_AA]
+                        fixed_ship_fire_control_system_slot = [SHIP_FCS]
+                        fixed_ship_radar_slot = [SHIP_RADAR]
+                        fixed_ship_engine_slot = [DD_ENGINE]
+                        fixed_ship_torpedo_slot = [DD_TORP]
+                        mid_1_custom_slot = [DD_TORP]
+                        rear_1_custom_slot = [DD_TORP]
+                    }
+                }
+            }
+            SHIP_NAME = "[OptShipGetName]"
+            VER = "[OptGetRomanVer]"
+            PREV_VER = "[?opt_prev_ver|0]"
+            DD_HULL = "[OptShipGetDDHull]"
+            SHIP_AA = "[OptShipGetAA]"
+            SHIP_FCS = "[OptShipGetFCS]"
+            SHIP_RADAR = "[OptShipGetRadar]"
+            DD_ENGINE = "[OptShipGetDDEngine]"
+            DD_TORP = "[OptShipGetDDTorp]"
+        }
+    }
+    # ---------- 3. 软攻主力轻巡洋舰 (1922~1944) ----------
+    else_if = {
+        limit = { check_variable = { opt_ship_mode = 3 } }
+        if = { limit = { check_variable = { opt_gui_era > 2 } has_tech = advanced_ship_hull_cruiser } set_variable = { opt_ship_hull_tier = 4 } }
+        else_if = { limit = { check_variable = { opt_gui_era > 1 } has_tech = improved_ship_hull_cruiser } set_variable = { opt_ship_hull_tier = 3 } }
+        else_if = { limit = { has_tech = basic_ship_hull_cruiser } set_variable = { opt_ship_hull_tier = 2 } }
+        else = { set_variable = { opt_ship_hull_tier = 1 } }
+
+        if = { limit = { has_tech = advanced_light_battery } set_variable = { opt_cl_gun_lvl = 4 } }
+        else_if = { limit = { has_tech = improved_light_battery } set_variable = { opt_cl_gun_lvl = 3 } }
+        else_if = { limit = { has_tech = basic_light_battery } set_variable = { opt_cl_gun_lvl = 2 } }
+        else = { set_variable = { opt_cl_gun_lvl = 1 } }
+
+        if = { limit = { has_tech = improved_cruiser_armor_scheme } set_variable = { opt_cl_armor_lvl = 3 } }
+        else_if = { limit = { has_tech = basic_cruiser_armor_scheme } set_variable = { opt_cl_armor_lvl = 2 } }
+        else = { set_variable = { opt_cl_armor_lvl = 1 } }
+
+        meta_effect = {
+            text = {
+                create_equipment_variant = {
+                    name = "[SHIP_NAME] [VER]"
+                    type = [CL_HULL]
+                    parent_version = [PREV_VER]
+                    modules = {
+                        fixed_ship_battery_slot = [CL_GUN]
+                        fixed_ship_anti_air_slot = [SHIP_AA]
+                        fixed_ship_fire_control_system_slot = [SHIP_FCS]
+                        fixed_ship_radar_slot = [SHIP_RADAR]
+                        fixed_ship_engine_slot = [CL_ENGINE]
+                        fixed_ship_armor_slot = [CL_ARMOR]
+                        mid_1_custom_slot = [CL_GUN]
+                        [CL_MID_2_LINE]
+                        [CL_FRONT_1_LINE]
+                        rear_1_custom_slot = [CL_GUN]
+                    }
+                }
+            }
+            SHIP_NAME = "[OptShipGetName]"
+            VER = "[OptGetRomanVer]"
+            PREV_VER = "[?opt_prev_ver|0]"
+            CL_HULL = "[OptShipGetCLHull]"
+            CL_GUN = "[OptShipGetCLGun]"
+            SHIP_AA = "[OptShipGetAA]"
+            SHIP_FCS = "[OptShipGetFCS]"
+            SHIP_RADAR = "[OptShipGetRadar]"
+            CL_ENGINE = "[OptShipGetCLEngine]"
+            CL_ARMOR = "[OptShipGetCLArmor]"
+            CL_MID_2_LINE = "[OptShipGetCLMid2Line]"
+            CL_FRONT_1_LINE = "[OptShipGetCLFront1Line]"
+        }
+    }
+    # ---------- 3. 破交潜艇 (1922~1944 满鱼雷槽 + 通气管) ----------
+    else_if = {
+        limit = { check_variable = { opt_ship_mode = 4 } }
+        if = { limit = { check_variable = { opt_gui_era > 2 } has_tech = advanced_ship_hull_submarine } set_variable = { opt_ship_hull_tier = 4 } }
+        else_if = { limit = { check_variable = { opt_gui_era > 1 } has_tech = improved_ship_hull_submarine } set_variable = { opt_ship_hull_tier = 3 } }
+        else_if = { limit = { has_tech = basic_ship_hull_submarine } set_variable = { opt_ship_hull_tier = 2 } }
+        else = { set_variable = { opt_ship_hull_tier = 1 } }
+
+        if = { limit = { has_tech = advanced_ship_torpedo_launcher } set_variable = { opt_sub_torp_lvl = 4 } }
+        else_if = { limit = { has_tech = improved_ship_torpedo_launcher } set_variable = { opt_sub_torp_lvl = 3 } }
+        else_if = { limit = { has_tech = basic_torpedo } set_variable = { opt_sub_torp_lvl = 2 } }
+        else = { set_variable = { opt_sub_torp_lvl = 1 } }
+
+        if = { limit = { has_tech = improved_submarine_snorkel } set_variable = { opt_sub_snorkel_lvl = 2 } }
+        else_if = { limit = { has_tech = basic_submarine_snorkel } set_variable = { opt_sub_snorkel_lvl = 1 } }
+        else = { set_variable = { opt_sub_snorkel_lvl = 0 } }
+
+        meta_effect = {
+            text = {
+                create_equipment_variant = {
+                    name = "[SHIP_NAME] [VER]"
+                    type = [SUB_HULL]
+                    parent_version = [PREV_VER]
+                    modules = {
+                        fixed_ship_torpedo_slot = [SUB_TORP]
+                        fixed_ship_engine_slot = [SUB_ENGINE]
+                        [SUB_REAR_LINE]
+                        [SUB_FRONT_LINE]
+                        [SUB_SNORKEL_LINE]
+                    }
+                }
+            }
+            SHIP_NAME = "[OptShipGetName]"
+            VER = "[OptGetRomanVer]"
+            PREV_VER = "[?opt_prev_ver|0]"
+            SUB_HULL = "[OptShipGetSubHull]"
+            SUB_TORP = "[OptShipGetSubTorp]"
+            SUB_ENGINE = "[OptShipGetSubEngine]"
+            SUB_REAR_LINE = "[OptShipGetSubRearLine]"
+            SUB_FRONT_LINE = "[OptShipGetSubFrontLine]"
+            SUB_SNORKEL_LINE = "[OptShipGetSubSnorkelLine]"
+        }
+    }
+    # ---------- 4. 主力战列舰 (BB 1922~1944 满重炮 + 副炮 + 雷达火控) ----------
+    else_if = {
+        limit = { check_variable = { opt_ship_mode = 5 } }
+        if = { limit = { check_variable = { opt_gui_era > 2 } has_tech = advanced_ship_hull_heavy } set_variable = { opt_ship_hull_tier = 4 } }
+        else_if = { limit = { check_variable = { opt_gui_era > 1 } has_tech = improved_ship_hull_heavy } set_variable = { opt_ship_hull_tier = 3 } }
+        else_if = { limit = { has_tech = basic_ship_hull_heavy } set_variable = { opt_ship_hull_tier = 2 } }
+        else = { set_variable = { opt_ship_hull_tier = 1 } }
+
+        if = { limit = { has_tech = advanced_heavy_battery } set_variable = { opt_bb_gun_lvl = 4 } }
+        else_if = { limit = { has_tech = improved_heavy_battery } set_variable = { opt_bb_gun_lvl = 3 } }
+        else_if = { limit = { has_tech = basic_heavy_battery } set_variable = { opt_bb_gun_lvl = 2 } }
+        else = { set_variable = { opt_bb_gun_lvl = 1 } }
+
+        if = { limit = { has_tech = improved_heavy_armor_scheme } set_variable = { opt_bb_armor_lvl = 3 } }
+        else_if = { limit = { has_tech = basic_heavy_armor_scheme } set_variable = { opt_bb_armor_lvl = 2 } }
+        else = { set_variable = { opt_bb_armor_lvl = 1 } }
+
+        meta_effect = {
+            text = {
+                create_equipment_variant = {
+                    name = "[SHIP_NAME] [VER]"
+                    type = [BB_HULL]
+                    parent_version = [PREV_VER]
+                    modules = {
+                        fixed_ship_battery_slot = [BB_GUN]
+                        fixed_ship_anti_air_slot = [SHIP_AA]
+                        fixed_ship_fire_control_system_slot = [SHIP_FCS]
+                        fixed_ship_radar_slot = [SHIP_RADAR]
+                        fixed_ship_engine_slot = [BB_ENGINE]
+                        fixed_ship_secondaries_slot = [SHIP_SEC]
+                        fixed_ship_armor_slot = [BB_ARMOR]
+                        front_1_custom_slot = [BB_GUN]
+                        mid_1_custom_slot = [SHIP_AA]
+                        [BB_MID2_LINE]
+                        rear_1_custom_slot = [BB_GUN]
+                    }
+                }
+            }
+            SHIP_NAME = "[OptShipGetName]"
+            VER = "[OptGetRomanVer]"
+            PREV_VER = "[?opt_prev_ver|0]"
+            BB_HULL = "[OptShipGetBBHull]"
+            BB_GUN = "[OptShipGetBBGun]"
+            SHIP_AA = "[OptShipGetAA]"
+            SHIP_FCS = "[OptShipGetFCS]"
+            SHIP_RADAR = "[OptShipGetRadar]"
+            BB_ENGINE = "[OptShipGetBBEngine]"
+            SHIP_SEC = "[OptShipGetSec]"
+            BB_ARMOR = "[OptShipGetBBArmor]"
+            BB_MID2_LINE = "[OptShipGetBBMid2Line]"
+        }
+    }
+    # ---------- 5. 航空母舰 (CV 1922~1944 满载飞行甲板) ----------
+    else = {
+        if = { limit = { check_variable = { opt_gui_era > 1 } has_tech = improved_ship_hull_carrier } set_variable = { opt_ship_hull_tier = 3 } }
+        else_if = { limit = { has_tech = basic_ship_hull_carrier } set_variable = { opt_ship_hull_tier = 2 } }
+        else = { set_variable = { opt_ship_hull_tier = 1 } }
+
+        meta_effect = {
+            text = {
+                create_equipment_variant = {
+                    name = "[SHIP_NAME] [VER]"
+                    type = [CV_HULL]
+                    parent_version = [PREV_VER]
+                    modules = {
+                        fixed_ship_deck_slot_1 = ship_deck_space
+                        fixed_ship_deck_slot_2 = ship_deck_space
+                        fixed_ship_anti_air_slot = [SHIP_AA]
+                        fixed_ship_radar_slot = [SHIP_RADAR]
+                        fixed_ship_engine_slot = [CV_ENGINE]
+                        fixed_ship_secondaries_slot = empty
+                        front_1_custom_slot = ship_deck_space
+                        [CV_MID1_LINE]
+                    }
+                }
+            }
+            SHIP_NAME = "[OptShipGetName]"
+            VER = "[OptGetRomanVer]"
+            PREV_VER = "[?opt_prev_ver|0]"
+            CV_HULL = "[OptShipGetCVHull]"
+            SHIP_AA = "[OptShipGetAA]"
+            SHIP_RADAR = "[OptShipGetRadar]"
+            CV_ENGINE = "[OptShipGetCVEngine]"
+            CV_MID1_LINE = "[OptShipGetCVMid1Line]"
+        }
+    }
+
+    clear_variable = opt_ship_mode
+    clear_variable = opt_ship_hull_tier
+    clear_variable = opt_ship_aa_lvl
+    clear_variable = opt_ship_fcs_lvl
+    clear_variable = opt_ship_radar_lvl
+    clear_variable = opt_ship_sonar_lvl
+    clear_variable = opt_ship_dc_lvl
+    clear_variable = opt_ship_sec_lvl
+    clear_variable = opt_cl_gun_lvl
+    clear_variable = opt_cl_armor_lvl
+    clear_variable = opt_sub_torp_lvl
+    clear_variable = opt_dd_torp_lvl
+    clear_variable = opt_sub_snorkel_lvl
+    clear_variable = opt_bb_gun_lvl
+    clear_variable = opt_bb_armor_lvl
+    clear_variable = opt_cur_ver
+    clear_variable = opt_prev_ver
+}
+
+opt_ship_scan_shared_techs = {
+    if = { limit = { has_tech = antiair5 } set_variable = { opt_ship_aa_lvl = 3 } }
+    else_if = { limit = { has_tech = antiair2 } set_variable = { opt_ship_aa_lvl = 2 } }
+    else = { set_variable = { opt_ship_aa_lvl = 1 } }
+
+    if = { limit = { has_tech = advanced_fire_control_system } set_variable = { opt_ship_fcs_lvl = 3 } }
+    else_if = { limit = { has_tech = improved_fire_control_system } set_variable = { opt_ship_fcs_lvl = 2 } }
+    else_if = { limit = { has_tech = basic_fire_control_system } set_variable = { opt_ship_fcs_lvl = 1 } }
+    else = { set_variable = { opt_ship_fcs_lvl = 0 } }
+
+    if = { limit = { has_tech = improved_decimetric_radar } set_variable = { opt_ship_radar_lvl = 3 } }
+    else_if = { limit = { has_tech = decimetric_radar } set_variable = { opt_ship_radar_lvl = 2 } }
+    else_if = { limit = { has_tech = radio_detection } set_variable = { opt_ship_radar_lvl = 1 } }
+    else = { set_variable = { opt_ship_radar_lvl = 0 } }
+
+    if = { limit = { has_tech = improved_sonar } set_variable = { opt_ship_sonar_lvl = 2 } }
+    else_if = { limit = { has_tech = sonar } set_variable = { opt_ship_sonar_lvl = 1 } }
+    else = { set_variable = { opt_ship_sonar_lvl = 0 } }
+
+    if = { limit = { has_tech = advanced_depth_charges } set_variable = { opt_ship_dc_lvl = 4 } }
+    else_if = { limit = { has_tech = improved_depth_charges } set_variable = { opt_ship_dc_lvl = 3 } }
+    else_if = { limit = { has_tech = basic_depth_charges } set_variable = { opt_ship_dc_lvl = 2 } }
+    else = { set_variable = { opt_ship_dc_lvl = 1 } }
+
+    if = { limit = { has_tech = basic_dp_light_battery } set_variable = { opt_ship_sec_lvl = 3 } }
+    else_if = { limit = { has_tech = improved_battery } set_variable = { opt_ship_sec_lvl = 2 } }
+    else = { set_variable = { opt_ship_sec_lvl = 1 } }
+}

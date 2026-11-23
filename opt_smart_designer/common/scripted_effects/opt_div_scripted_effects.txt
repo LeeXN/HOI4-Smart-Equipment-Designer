@@ -1,0 +1,246 @@
+opt_assemble_division = {
+    # 支援连 ID：1=工兵, 2=支援炮, 3=防空, 4=侦察, 5=后勤, 6=维修, 7=信号, 8=中坦喷火, 9=轻坦装侦
+    set_variable = { opt_sup_count = 0 }
+    set_variable = { opt_sup_0 = 0 }
+    set_variable = { opt_sup_1 = 0 }
+    set_variable = { opt_sup_2 = 0 }
+    set_variable = { opt_sup_3 = 0 }
+    set_variable = { opt_sup_4 = 0 }
+
+    if = { limit = { has_tech = mechanised_infantry } set_variable = { opt_mob_inf_type = 2 } }
+    else = { set_variable = { opt_mob_inf_type = 1 } }
+
+    # 1. 18宽填线步兵师
+    if = {
+        limit = { check_variable = { opt_div_mode = 1 } }
+        if = { limit = { has_tech = tech_engineers }     set_temp_variable = { opt_push_id = 1 } opt_div_push_support = yes }
+        if = { limit = { has_tech = interwar_antiair }   set_temp_variable = { opt_push_id = 3 } opt_div_push_support = yes }
+        if = { limit = { has_tech = interwar_artillery } set_temp_variable = { opt_push_id = 2 } opt_div_push_support = yes }
+
+        meta_effect = {
+            text = {
+                division_template = {
+                    name = "[DIV_NAME]"
+                    regiments = {
+                        infantry = { x = 0 y = 0 } infantry = { x = 0 y = 1 } infantry = { x = 0 y = 2 }
+                        infantry = { x = 1 y = 0 } infantry = { x = 1 y = 1 } infantry = { x = 1 y = 2 }
+                        infantry = { x = 2 y = 0 } infantry = { x = 2 y = 1 } infantry = { x = 2 y = 2 }
+                    }
+                    support = { [SUP_0] [SUP_1] [SUP_2] [SUP_3] [SUP_4] }
+                }
+            }
+            DIV_NAME = "[OptDivGetName]" SUP_0 = "[OptDivGetSup0]" SUP_1 = "[OptDivGetSup1]" SUP_2 = "[OptDivGetSup2]" SUP_3 = "[OptDivGetSup3]" SUP_4 = "[OptDivGetSup4]"
+        }
+    }
+    # 2. 27宽进攻步炮师（9步3炮）
+    else_if = {
+        limit = { check_variable = { opt_div_mode = 2 } }
+        if = { limit = { has_tech = interwar_artillery }     set_temp_variable = { opt_push_id = 2 } opt_div_push_support = yes }
+        if = { limit = { has_tech = tech_engineers }         set_temp_variable = { opt_push_id = 1 } opt_div_push_support = yes }
+        if = { limit = { has_tech = interwar_antiair }       set_temp_variable = { opt_push_id = 3 } opt_div_push_support = yes }
+        if = { limit = { has_dlc = "No Step Back" has_tech = tech_engineers2 has_tech = basic_medium_tank_chassis } set_temp_variable = { opt_push_id = 8 } opt_div_push_support = yes }
+        if = { limit = { has_tech = tech_logistics_company } set_temp_variable = { opt_push_id = 5 } opt_div_push_support = yes }
+        if = { limit = { has_tech = tech_recon }             set_temp_variable = { opt_push_id = 4 } opt_div_push_support = yes }
+
+        meta_effect = {
+            text = {
+                division_template = {
+                    name = "[DIV_NAME]"
+                    regiments = {
+                        infantry = { x = 0 y = 0 } infantry = { x = 0 y = 1 } infantry = { x = 0 y = 2 }
+                        infantry = { x = 1 y = 0 } infantry = { x = 1 y = 1 } infantry = { x = 1 y = 2 }
+                        infantry = { x = 2 y = 0 } infantry = { x = 2 y = 1 } infantry = { x = 2 y = 2 }
+                        artillery_brigade = { x = 3 y = 0 } artillery_brigade = { x = 3 y = 1 } artillery_brigade = { x = 3 y = 2 }
+                    }
+                    support = { [SUP_0] [SUP_1] [SUP_2] [SUP_3] [SUP_4] }
+                }
+            }
+            DIV_NAME = "[OptDivGetName]" SUP_0 = "[OptDivGetSup0]" SUP_1 = "[OptDivGetSup1]" SUP_2 = "[OptDivGetSup2]" SUP_3 = "[OptDivGetSup3]" SUP_4 = "[OptDivGetSup4]"
+        }
+    }
+    # 3. 20宽早战轻坦快反师（5轻坦 + 5摩步）
+    else_if = {
+        limit = { check_variable = { opt_div_mode = 3 } }
+        if = { limit = { has_tech = tech_recon has_tech = basic_light_tank_chassis } set_temp_variable = { opt_push_id = 9 } opt_div_push_support = yes }
+        if = { limit = { has_tech = tech_engineers }         set_temp_variable = { opt_push_id = 1 } opt_div_push_support = yes }
+        if = { limit = { has_tech = interwar_artillery }     set_temp_variable = { opt_push_id = 2 } opt_div_push_support = yes }
+        if = { limit = { has_tech = interwar_antiair }       set_temp_variable = { opt_push_id = 3 } opt_div_push_support = yes }
+        if = { limit = { has_tech = tech_logistics_company } set_temp_variable = { opt_push_id = 5 } opt_div_push_support = yes }
+
+        meta_effect = {
+            text = {
+                division_template = {
+                    name = "[DIV_NAME]"
+                    regiments = {
+                        light_armor = { x = 0 y = 0 } light_armor = { x = 0 y = 1 } light_armor = { x = 0 y = 2 }
+                        light_armor = { x = 1 y = 0 } light_armor = { x = 1 y = 1 }
+                        [MOB_INF] = { x = 2 y = 0 } [MOB_INF] = { x = 2 y = 1 } [MOB_INF] = { x = 2 y = 2 }
+                        [MOB_INF] = { x = 3 y = 0 } [MOB_INF] = { x = 3 y = 1 }
+                    }
+                    support = { [SUP_0] [SUP_1] [SUP_2] [SUP_3] [SUP_4] }
+                }
+            }
+            DIV_NAME = "[OptDivGetName]" MOB_INF = "[OptDivGetMobInf]" SUP_0 = "[OptDivGetSup0]" SUP_1 = "[OptDivGetSup1]" SUP_2 = "[OptDivGetSup2]" SUP_3 = "[OptDivGetSup3]" SUP_4 = "[OptDivGetSup4]"
+        }
+    }
+    # 4. 30宽主力中坦装甲师（机动战 9坦6步 / 其他 7坦8步）
+    else_if = {
+        limit = { check_variable = { opt_div_mode = 4 } }
+        if = { limit = { has_dlc = "No Step Back" has_tech = tech_engineers2 } set_temp_variable = { opt_push_id = 8 } opt_div_push_support = yes }
+        if = { limit = { has_tech = tech_engineers }         set_temp_variable = { opt_push_id = 1 } opt_div_push_support = yes }
+        if = { limit = { has_tech = tech_logistics_company } set_temp_variable = { opt_push_id = 5 } opt_div_push_support = yes }
+        if = { limit = { has_tech = interwar_antiair }       set_temp_variable = { opt_push_id = 3 } opt_div_push_support = yes }
+        if = { limit = { has_tech = interwar_artillery }     set_temp_variable = { opt_push_id = 2 } opt_div_push_support = yes }
+        if = { limit = { opt_is_mobile_warfare = yes has_tech = tech_signal_company } set_temp_variable = { opt_push_id = 7 } opt_div_push_support = yes }
+        else_if = { limit = { has_tech = tech_maintenance_company } set_temp_variable = { opt_push_id = 6 } opt_div_push_support = yes }
+
+        if = {
+            limit = { opt_is_mobile_warfare = yes }
+            meta_effect = {
+                text = {
+                    division_template = {
+                        name = "[DIV_NAME]"
+                        regiments = {
+                            medium_armor = { x = 0 y = 0 } medium_armor = { x = 0 y = 1 } medium_armor = { x = 0 y = 2 }
+                            medium_armor = { x = 1 y = 0 } medium_armor = { x = 1 y = 1 } medium_armor = { x = 1 y = 2 }
+                            medium_armor = { x = 2 y = 0 } medium_armor = { x = 2 y = 1 } medium_armor = { x = 2 y = 2 }
+                            [MOB_INF] = { x = 3 y = 0 } [MOB_INF] = { x = 3 y = 1 } [MOB_INF] = { x = 3 y = 2 }
+                            [MOB_INF] = { x = 4 y = 0 } [MOB_INF] = { x = 4 y = 1 } [MOB_INF] = { x = 4 y = 2 }
+                        }
+                        support = { [SUP_0] [SUP_1] [SUP_2] [SUP_3] [SUP_4] }
+                    }
+                }
+                DIV_NAME = "[OptDivGetName]" MOB_INF = "[OptDivGetMobInf]" SUP_0 = "[OptDivGetSup0]" SUP_1 = "[OptDivGetSup1]" SUP_2 = "[OptDivGetSup2]" SUP_3 = "[OptDivGetSup3]" SUP_4 = "[OptDivGetSup4]"
+            }
+        }
+        else = {
+            meta_effect = {
+                text = {
+                    division_template = {
+                        name = "[DIV_NAME]"
+                        regiments = {
+                            medium_armor = { x = 0 y = 0 } medium_armor = { x = 0 y = 1 } medium_armor = { x = 0 y = 2 } medium_armor = { x = 0 y = 3 }
+                            medium_armor = { x = 1 y = 0 } medium_armor = { x = 1 y = 1 } medium_armor = { x = 1 y = 2 }
+                            [MOB_INF] = { x = 2 y = 0 } [MOB_INF] = { x = 2 y = 1 } [MOB_INF] = { x = 2 y = 2 } [MOB_INF] = { x = 2 y = 3 }
+                            [MOB_INF] = { x = 3 y = 0 } [MOB_INF] = { x = 3 y = 1 } [MOB_INF] = { x = 3 y = 2 } [MOB_INF] = { x = 3 y = 3 }
+                        }
+                        support = { [SUP_0] [SUP_1] [SUP_2] [SUP_3] [SUP_4] }
+                    }
+                }
+                DIV_NAME = "[OptDivGetName]" MOB_INF = "[OptDivGetMobInf]" SUP_0 = "[OptDivGetSup0]" SUP_1 = "[OptDivGetSup1]" SUP_2 = "[OptDivGetSup2]" SUP_3 = "[OptDivGetSup3]" SUP_4 = "[OptDivGetSup4]"
+            }
+        }
+    }
+
+    # 6. 25宽精锐山地师（8山地 + 3炮，山地 25/50/75 宽度完美契合）
+    else_if = {
+        limit = { check_variable = { opt_div_mode = 6 } }
+        if = { limit = { has_tech = tech_engineers }         set_temp_variable = { opt_push_id = 1 } opt_div_push_support = yes }
+        if = { limit = { has_tech = interwar_artillery }     set_temp_variable = { opt_push_id = 2 } opt_div_push_support = yes }
+        if = { limit = { has_tech = interwar_antiair }       set_temp_variable = { opt_push_id = 3 } opt_div_push_support = yes }
+        if = { limit = { has_tech = tech_recon }             set_temp_variable = { opt_push_id = 4 } opt_div_push_support = yes }
+        if = { limit = { has_tech = tech_logistics_company } set_temp_variable = { opt_push_id = 5 } opt_div_push_support = yes }
+
+        meta_effect = {
+            text = {
+                division_template = {
+                    name = "[DIV_NAME]"
+                    regiments = {
+                        mountaineers = { x = 0 y = 0 } mountaineers = { x = 0 y = 1 } mountaineers = { x = 0 y = 2 }
+                        mountaineers = { x = 1 y = 0 } mountaineers = { x = 1 y = 1 } mountaineers = { x = 1 y = 2 }
+                        mountaineers = { x = 2 y = 0 } mountaineers = { x = 2 y = 1 }
+                        artillery_brigade = { x = 3 y = 0 } artillery_brigade = { x = 3 y = 1 } artillery_brigade = { x = 3 y = 2 }
+                    }
+                    support = { [SUP_0] [SUP_1] [SUP_2] [SUP_3] [SUP_4] }
+                }
+            }
+            DIV_NAME = "[OptDivGetName]" SUP_0 = "[OptDivGetSup0]" SUP_1 = "[OptDivGetSup1]" SUP_2 = "[OptDivGetSup2]" SUP_3 = "[OptDivGetSup3]" SUP_4 = "[OptDivGetSup4]"
+        }
+    }
+    # 7. 30宽抢滩陆战师（12海军陆战 + 2炮 + 工兵/喷火）
+    else_if = {
+        limit = { check_variable = { opt_div_mode = 7 } }
+        if = { limit = { has_tech = tech_engineers }         set_temp_variable = { opt_push_id = 1 } opt_div_push_support = yes }
+        if = { limit = { has_dlc = "No Step Back" has_tech = tech_engineers2 has_tech = basic_medium_tank_chassis } set_temp_variable = { opt_push_id = 8 } opt_div_push_support = yes }
+        if = { limit = { has_tech = interwar_artillery }     set_temp_variable = { opt_push_id = 2 } opt_div_push_support = yes }
+        if = { limit = { has_tech = interwar_antiair }       set_temp_variable = { opt_push_id = 3 } opt_div_push_support = yes }
+        if = { limit = { has_tech = tech_logistics_company } set_temp_variable = { opt_push_id = 5 } opt_div_push_support = yes }
+
+        meta_effect = {
+            text = {
+                division_template = {
+                    name = "[DIV_NAME]"
+                    regiments = {
+                        marine = { x = 0 y = 0 } marine = { x = 0 y = 1 } marine = { x = 0 y = 2 } marine = { x = 0 y = 3 }
+                        marine = { x = 1 y = 0 } marine = { x = 1 y = 1 } marine = { x = 1 y = 2 } marine = { x = 1 y = 3 }
+                        marine = { x = 2 y = 0 } marine = { x = 2 y = 1 } marine = { x = 2 y = 2 } marine = { x = 2 y = 3 }
+                        artillery_brigade = { x = 3 y = 0 } artillery_brigade = { x = 3 y = 1 }
+                    }
+                    support = { [SUP_0] [SUP_1] [SUP_2] [SUP_3] [SUP_4] }
+                }
+            }
+            DIV_NAME = "[OptDivGetName]" SUP_0 = "[OptDivGetSup0]" SUP_1 = "[OptDivGetSup1]" SUP_2 = "[OptDivGetSup2]" SUP_3 = "[OptDivGetSup3]" SUP_4 = "[OptDivGetSup4]"
+        }
+    }
+    # 8. 治安宪兵骑兵师（满编骑兵 + 宪兵连，镇压占领区性价比最高）
+    else_if = {
+        limit = { check_variable = { opt_div_mode = 8 } }
+        if = { limit = { has_tech = tech_military_police } set_temp_variable = { opt_push_id = 10 } opt_div_push_support = yes }
+
+        meta_effect = {
+            text = {
+                division_template = {
+                    name = "[DIV_NAME]"
+                    regiments = {
+                        cavalry = { x = 0 y = 0 } cavalry = { x = 0 y = 1 } cavalry = { x = 0 y = 2 } cavalry = { x = 0 y = 3 } cavalry = { x = 0 y = 4 }
+                        cavalry = { x = 1 y = 0 } cavalry = { x = 1 y = 1 } cavalry = { x = 1 y = 2 } cavalry = { x = 1 y = 3 } cavalry = { x = 1 y = 4 }
+                    }
+                    support = { [SUP_0] [SUP_1] [SUP_2] [SUP_3] [SUP_4] }
+                }
+            }
+            DIV_NAME = "[OptDivGetName]" SUP_0 = "[OptDivGetSup0]" SUP_1 = "[OptDivGetSup1]" SUP_2 = "[OptDivGetSup2]" SUP_3 = "[OptDivGetSup3]" SUP_4 = "[OptDivGetSup4]"
+        }
+    }
+    # 5. 26宽太空步兵（9步 + 2炮 + 1重坦）
+    else = {
+        if = { limit = { has_dlc = "No Step Back" has_tech = tech_engineers2 has_tech = basic_medium_tank_chassis } set_temp_variable = { opt_push_id = 8 } opt_div_push_support = yes }
+        if = { limit = { has_tech = tech_engineers }         set_temp_variable = { opt_push_id = 1 } opt_div_push_support = yes }
+        if = { limit = { has_tech = interwar_artillery }     set_temp_variable = { opt_push_id = 2 } opt_div_push_support = yes }
+        if = { limit = { has_tech = interwar_antiair }       set_temp_variable = { opt_push_id = 3 } opt_div_push_support = yes }
+        if = { limit = { has_tech = tech_logistics_company } set_temp_variable = { opt_push_id = 5 } opt_div_push_support = yes }
+
+        meta_effect = {
+            text = {
+                division_template = {
+                    name = "[DIV_NAME]"
+                    regiments = {
+                        infantry = { x = 0 y = 0 } infantry = { x = 0 y = 1 } infantry = { x = 0 y = 2 }
+                        infantry = { x = 1 y = 0 } infantry = { x = 1 y = 1 } infantry = { x = 1 y = 2 }
+                        infantry = { x = 2 y = 0 } infantry = { x = 2 y = 1 } infantry = { x = 2 y = 2 }
+                        artillery_brigade = { x = 3 y = 0 } artillery_brigade = { x = 3 y = 1 }
+                        heavy_armor = { x = 4 y = 0 }
+                    }
+                    support = { [SUP_0] [SUP_1] [SUP_2] [SUP_3] [SUP_4] }
+                }
+            }
+            DIV_NAME = "[OptDivGetName]" SUP_0 = "[OptDivGetSup0]" SUP_1 = "[OptDivGetSup1]" SUP_2 = "[OptDivGetSup2]" SUP_3 = "[OptDivGetSup3]" SUP_4 = "[OptDivGetSup4]"
+        }
+    }
+
+    clear_variable = opt_div_mode
+    clear_variable = opt_mob_inf_type
+    clear_variable = opt_sup_count
+    clear_variable = opt_sup_0
+    clear_variable = opt_sup_1
+    clear_variable = opt_sup_2
+    clear_variable = opt_sup_3
+    clear_variable = opt_sup_4
+}
+
+opt_div_push_support = {
+    if = { limit = { check_variable = { opt_sup_count = 0 } } set_variable = { opt_sup_0 = opt_push_id } add_to_variable = { opt_sup_count = 1 } }
+    else_if = { limit = { check_variable = { opt_sup_count = 1 } } set_variable = { opt_sup_1 = opt_push_id } add_to_variable = { opt_sup_count = 1 } }
+    else_if = { limit = { check_variable = { opt_sup_count = 2 } } set_variable = { opt_sup_2 = opt_push_id } add_to_variable = { opt_sup_count = 1 } }
+    else_if = { limit = { check_variable = { opt_sup_count = 3 } } set_variable = { opt_sup_3 = opt_push_id } add_to_variable = { opt_sup_count = 1 } }
+    else_if = { limit = { check_variable = { opt_sup_count = 4 } } set_variable = { opt_sup_4 = opt_push_id } add_to_variable = { opt_sup_count = 1 } }
+}

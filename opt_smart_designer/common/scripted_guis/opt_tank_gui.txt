@@ -1,0 +1,192 @@
+scripted_gui = {
+
+    opt_tank_topbar_toggle = {
+        context_type = player_context
+        window_name = "opt_tank_topbar_toggle_window"
+
+        visible = { is_ai = no }
+
+        effects = {
+            opt_topbar_open_btn_click = {
+                if = { limit = { has_country_flag = opt_tank_panel_open } clr_country_flag = opt_tank_panel_open }
+                else = {
+                    set_country_flag = opt_tank_panel_open
+                    if = { limit = { NOT = { check_variable = { opt_gui_tab > 0 } } }     set_variable = { opt_gui_tab = 1 } }
+                    if = { limit = { NOT = { check_variable = { opt_gui_mode > 0 } } }    set_variable = { opt_gui_mode = 1 } }
+                    if = { limit = { NOT = { check_variable = { opt_gui_theater > 0 } } } set_variable = { opt_gui_theater = 1 } }
+                    if = { limit = { NOT = { check_variable = { opt_gui_era > 0 } } }     set_variable = { opt_gui_era = 2 } }
+                    opt_recalculate_strategy = yes
+                }
+            }
+        }
+    }
+
+    opt_tank_main_panel = {
+        context_type = player_context
+        window_name = "opt_tank_main_panel_window"
+
+        visible = { is_ai = no has_country_flag = opt_tank_panel_open }
+
+        effects = {
+            opt_close_btn_click = { clr_country_flag = opt_tank_panel_open }
+
+            opt_tab_1_btn_click = { set_variable = { opt_gui_tab = 1 } set_variable = { opt_gui_mode = 1 } opt_recalculate_strategy = yes }
+            opt_tab_2_btn_click = { set_variable = { opt_gui_tab = 2 } set_variable = { opt_gui_mode = 2 } }
+            opt_tab_3_btn_click = { set_variable = { opt_gui_tab = 3 } set_variable = { opt_gui_mode = 1 } }
+            opt_tab_4_btn_click = { set_variable = { opt_gui_tab = 4 } set_variable = { opt_gui_mode = 3 } }
+            opt_tab_5_btn_click = { set_variable = { opt_gui_tab = 5 } set_variable = { opt_gui_mode = 4 } }
+
+            opt_mode_1_btn_click = { set_variable = { opt_gui_mode = 1 } }
+            opt_mode_2_btn_click = { set_variable = { opt_gui_mode = 2 } }
+            opt_mode_3_btn_click = { set_variable = { opt_gui_mode = 3 } }
+            opt_mode_4_btn_click = { set_variable = { opt_gui_mode = 4 } }
+            opt_mode_5_btn_click = { set_variable = { opt_gui_mode = 5 } }
+            opt_mode_6_btn_click = { set_variable = { opt_gui_mode = 6 } }
+            opt_mode_7_btn_click = { set_variable = { opt_gui_mode = 7 } }
+            opt_mode_8_btn_click = { set_variable = { opt_gui_mode = 8 } }
+
+            opt_era_btn_click = {
+                if = { limit = { check_variable = { opt_gui_era = 1 } } set_variable = { opt_gui_era = 2 } }
+                else_if = { limit = { check_variable = { opt_gui_era = 2 } } set_variable = { opt_gui_era = 3 } }
+                else = { set_variable = { opt_gui_era = 1 } }
+            }
+
+            opt_theater_btn_click = {
+                if = { limit = { check_variable = { opt_gui_theater = 1 } } set_variable = { opt_gui_theater = 2 } }
+                else_if = { limit = { check_variable = { opt_gui_theater = 2 } } set_variable = { opt_gui_theater = 3 } }
+                else_if = { limit = { check_variable = { opt_gui_theater = 3 } } set_variable = { opt_gui_theater = 4 } }
+                else = { set_variable = { opt_gui_theater = 1 } }
+                opt_recalculate_strategy = yes
+            }
+
+            opt_auto_upgrade_btn_click = {
+                if = { limit = { check_variable = { opt_auto_upgrade = 1 } } set_variable = { opt_auto_upgrade = 0 } }
+                else = {
+                    set_variable = { opt_auto_upgrade = 1 }
+                    opt_compute_global_tech_sig = yes
+                    set_variable = { opt_last_auto_tank_sig = opt_sig_tank }
+                    set_variable = { opt_last_auto_plane_sig = opt_sig_plane }
+                    set_variable = { opt_last_auto_ship_sig = opt_sig_ship }
+                }
+            }
+
+            opt_generate_btn_click = {
+                if = { limit = { check_variable = { opt_gui_tab = 1 } } opt_recalculate_strategy = yes }
+                else_if = {
+                    limit = { check_variable = { opt_gui_tab = 2 } }
+                    army_experience = -20
+                    if = { limit = { check_variable = { opt_gui_mode = 1 } } set_country_flag = opt_track_tank_1 }
+                    else_if = { limit = { check_variable = { opt_gui_mode = 2 } } set_country_flag = opt_track_tank_2 }
+                    else_if = { limit = { check_variable = { opt_gui_mode = 3 } } set_country_flag = opt_track_tank_3 }
+                    else_if = { limit = { check_variable = { opt_gui_mode = 4 } } set_country_flag = opt_track_tank_4 }
+                    else_if = { limit = { check_variable = { opt_gui_mode = 6 } } set_country_flag = opt_track_tank_6 }
+                    set_variable = { opt_tank_mode = opt_gui_mode }
+                    opt_assemble_tank_v4 = yes
+                }
+                else_if = {
+                    limit = { check_variable = { opt_gui_tab = 3 } }
+                    air_experience = -20
+                    if = { limit = { check_variable = { opt_gui_mode = 1 } } set_country_flag = opt_track_plane_1 }
+                    else_if = { limit = { check_variable = { opt_gui_mode = 2 } } set_country_flag = opt_track_plane_2 }
+                    else_if = { limit = { check_variable = { opt_gui_mode = 3 } } set_country_flag = opt_track_plane_3 }
+                    else_if = { limit = { check_variable = { opt_gui_mode = 4 } } set_country_flag = opt_track_plane_4 }
+                    else_if = { limit = { check_variable = { opt_gui_mode = 5 } } set_country_flag = opt_track_plane_5 }
+                    else_if = { limit = { check_variable = { opt_gui_mode = 6 } } set_country_flag = opt_track_plane_6 }
+                    else_if = { limit = { check_variable = { opt_gui_mode = 7 } } set_country_flag = opt_track_plane_7 }
+                    set_variable = { opt_plane_mode = opt_gui_mode }
+                    opt_assemble_plane = yes
+                }
+                else_if = {
+                    limit = { check_variable = { opt_gui_tab = 4 } }
+                    navy_experience = -20
+                    if = { limit = { check_variable = { opt_gui_mode = 1 } } set_country_flag = opt_track_ship_1 }
+                    else_if = { limit = { check_variable = { opt_gui_mode = 2 } } set_country_flag = opt_track_ship_2 }
+                    else_if = { limit = { check_variable = { opt_gui_mode = 3 } } set_country_flag = opt_track_ship_3 }
+                    else_if = { limit = { check_variable = { opt_gui_mode = 4 } } set_country_flag = opt_track_ship_4 }
+                    else_if = { limit = { check_variable = { opt_gui_mode = 5 } } set_country_flag = opt_track_ship_5 }
+                    else_if = { limit = { check_variable = { opt_gui_mode = 6 } } set_country_flag = opt_track_ship_6 }
+                    set_variable = { opt_ship_mode = opt_gui_mode }
+                    opt_assemble_ship = yes
+                }
+                else = {
+                    army_experience = -25
+                    set_variable = { opt_div_mode = opt_gui_mode }
+                    opt_assemble_division = yes
+                }
+            }
+        }
+
+        triggers = {
+            opt_mode_4_btn_visible = { NOT = { check_variable = { opt_gui_tab = 1 } } }
+            opt_mode_5_btn_visible = { NOT = { check_variable = { opt_gui_tab = 1 } } }
+            opt_mode_6_btn_visible = { NOT = { check_variable = { opt_gui_tab = 1 } } }
+            opt_mode_7_btn_visible = { OR = { check_variable = { opt_gui_tab = 2 } check_variable = { opt_gui_tab = 3 } check_variable = { opt_gui_tab = 5 } } }
+            opt_mode_8_btn_visible = { check_variable = { opt_gui_tab = 5 } }
+
+            opt_generate_btn_click_enabled = {
+                OR = {
+                    check_variable = { opt_gui_tab = 1 }
+                    # Tab 2: 7 坦克
+                    AND = {
+                        check_variable = { opt_gui_tab = 2 }
+                        has_dlc = "No Step Back"
+                        has_army_experience > 19
+                        OR = {
+                            AND = { check_variable = { opt_gui_mode = 1 } has_tech = basic_light_tank_chassis }
+                            AND = { check_variable = { opt_gui_mode = 2 } has_tech = basic_medium_tank_chassis }
+                            AND = { check_variable = { opt_gui_mode = 3 } has_tech = basic_heavy_tank_chassis }
+                            AND = { check_variable = { opt_gui_mode = 4 } has_tech = basic_medium_tank_chassis has_tech = tech_engineers2 }
+                            AND = { check_variable = { opt_gui_mode = 5 } has_tech = basic_light_tank_chassis }
+                            AND = { check_variable = { opt_gui_mode = 6 } has_tech = basic_medium_tank_chassis has_tech = artillery1 }
+                            AND = { check_variable = { opt_gui_mode = 7 } has_tech = main_battle_tank_chassis }
+                        }
+                    }
+                    # Tab 3: 7 飞机（含舰载战机 + 舰载海轰 + 远洋重战）
+                    AND = {
+                        check_variable = { opt_gui_tab = 3 }
+                        has_dlc = "By Blood Alone"
+                        has_air_experience > 19
+                        OR = {
+                            AND = { check_variable = { opt_gui_mode = 1 } has_tech = basic_small_airframe }
+                            AND = { check_variable = { opt_gui_mode = 2 } has_tech = basic_small_airframe }
+                            AND = { check_variable = { opt_gui_mode = 3 } has_tech = basic_small_airframe has_tech = air_torpedoe_1 }
+                            AND = { check_variable = { opt_gui_mode = 4 } has_tech = basic_large_airframe }
+                            AND = { check_variable = { opt_gui_mode = 5 } has_tech = basic_small_airframe }
+                            AND = { check_variable = { opt_gui_mode = 6 } has_tech = basic_small_airframe has_tech = air_torpedoe_1 }
+                            AND = { check_variable = { opt_gui_mode = 7 } has_tech = basic_medium_airframe }
+                        }
+                    }
+                    # Tab 4: 6 船只（护航驱逐 / 雷击驱逐 / 轻巡 / 潜艇 / 战列 / 航母）
+                    AND = {
+                        check_variable = { opt_gui_tab = 4 }
+                        has_dlc = "Man the Guns"
+                        has_navy_experience > 19
+                        OR = {
+                            AND = { check_variable = { opt_gui_mode = 1 } has_tech = early_ship_hull_light }
+                            AND = { check_variable = { opt_gui_mode = 2 } has_tech = early_ship_hull_light }
+                            AND = { check_variable = { opt_gui_mode = 3 } has_tech = early_ship_hull_cruiser }
+                            AND = { check_variable = { opt_gui_mode = 4 } has_tech = early_ship_hull_submarine }
+                            AND = { check_variable = { opt_gui_mode = 5 } has_tech = early_ship_hull_heavy }
+                            AND = { check_variable = { opt_gui_mode = 6 } has_tech = early_ship_hull_carrier }
+                        }
+                    }
+                    # Tab 5: 8 师级编制
+                    AND = {
+                        check_variable = { opt_gui_tab = 5 }
+                        has_army_experience > 24
+                        OR = {
+                            check_variable = { opt_gui_mode = 1 }
+                            AND = { check_variable = { opt_gui_mode = 2 } has_tech = interwar_artillery }
+                            AND = { check_variable = { opt_gui_mode = 3 } has_tech = basic_light_tank_chassis has_tech = motorised_infantry }
+                            AND = { check_variable = { opt_gui_mode = 4 } has_tech = basic_medium_tank_chassis has_tech = motorised_infantry }
+                            AND = { check_variable = { opt_gui_mode = 5 } has_tech = interwar_artillery has_tech = basic_heavy_tank_chassis }
+                            AND = { check_variable = { opt_gui_mode = 6 } has_tech = tech_mountaineers has_tech = interwar_artillery }
+                            AND = { check_variable = { opt_gui_mode = 7 } has_tech = marines has_tech = interwar_artillery }
+                            check_variable = { opt_gui_mode = 8 }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

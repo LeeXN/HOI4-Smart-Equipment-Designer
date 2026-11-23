@@ -1,0 +1,102 @@
+defined_text = {
+    name = OptGetVariantName
+    text = { trigger = { check_variable = { opt_tank_mode = 1 } } localization_key = opt_tank_name_light }
+    text = { trigger = { check_variable = { opt_tank_mode = 2 } } localization_key = opt_tank_name_allrounder }
+    text = { trigger = { check_variable = { opt_tank_mode = 3 } } localization_key = opt_tank_name_heavy }
+    text = { trigger = { check_variable = { opt_tank_mode = 4 } } localization_key = opt_tank_name_flame }
+    text = { trigger = { check_variable = { opt_tank_mode = 6 } } localization_key = opt_tank_name_spg }
+    text = { trigger = { check_variable = { opt_tank_mode = 7 } } localization_key = opt_tank_name_mbt }
+    text = { localization_key = opt_tank_name_recon }
+}
+defined_text = {
+    name = OptGetLightChassis
+    text = { trigger = { check_variable = { opt_chassis_id = 3 } } localization_key = opt_key_light_tank_chassis_3 }
+    text = { trigger = { check_variable = { opt_chassis_id = 2 } } localization_key = opt_key_light_tank_chassis_2 }
+    text = { localization_key = opt_key_light_tank_chassis_1 }
+}
+defined_text = {
+    name = OptGetLightGun
+    text = { trigger = { check_variable = { opt_lt_gun = 1 } } localization_key = opt_key_tank_close_support_gun }
+    text = { localization_key = opt_key_tank_auto_cannon }
+}
+defined_text = {
+    name = OptGetChassis
+    text = { trigger = { check_variable = { opt_chassis_id = 3 } } localization_key = opt_key_medium_tank_chassis_3 }
+    text = { trigger = { check_variable = { opt_chassis_id = 2 } } localization_key = opt_key_medium_tank_chassis_2 }
+    text = { localization_key = opt_key_medium_tank_chassis_1 }
+}
+defined_text = {
+    name = OptGetHeavyChassis
+    text = { trigger = { check_variable = { opt_chassis_id = 3 } } localization_key = opt_key_heavy_tank_chassis_3 }
+    text = { trigger = { check_variable = { opt_chassis_id = 2 } } localization_key = opt_key_heavy_tank_chassis_2 }
+    text = { localization_key = opt_key_heavy_tank_chassis_1 }
+}
+defined_text = {
+    name = OptGetFlameChassis
+    text = { trigger = { check_variable = { opt_chassis_id = 3 } } localization_key = opt_key_medium_tank_flame_chassis_3 }
+    text = { trigger = { check_variable = { opt_chassis_id = 2 } } localization_key = opt_key_medium_tank_flame_chassis_2 }
+    text = { localization_key = opt_key_medium_tank_flame_chassis_1 }
+}
+defined_text = {
+    name = OptGetMainGun
+    text = { trigger = { check_variable = { opt_gun_id = 4 } } localization_key = opt_key_tank_medium_howitzer_2 }
+    text = { trigger = { check_variable = { opt_gun_id = 3 } } localization_key = opt_key_tank_medium_howitzer }
+    text = { trigger = { check_variable = { opt_gun_id = 2 } } localization_key = opt_key_tank_medium_cannon }
+    text = { localization_key = opt_key_tank_close_support_gun }
+}
+defined_text = {
+    name = OptGetTurret
+    text = { trigger = { check_variable = { opt_turret_id = 3 } } localization_key = opt_key_tank_medium_three_man_tank_turret }
+    text = { localization_key = opt_key_tank_medium_two_man_tank_turret }
+}
+defined_text = {
+    name = OptGetSuspension
+    text = { trigger = { check_variable = { opt_suspension_id = 3 } } localization_key = opt_key_tank_torsion_bar_suspension }
+    text = { trigger = { check_variable = { opt_suspension_id = 2 } } localization_key = opt_key_tank_christie_suspension }
+    text = { localization_key = opt_key_tank_bogie_suspension }
+}
+defined_text = {
+    name = OptGetArmor
+    text = { trigger = { check_variable = { opt_armor_id = 2 } } localization_key = opt_key_tank_welded_armor }
+    text = { localization_key = opt_key_tank_riveted_armor }
+}
+defined_text = {
+    name = OptGetEngine
+    text = { trigger = { check_variable = { opt_engine_id = 2 } } localization_key = opt_key_tank_diesel_engine }
+    text = { localization_key = opt_key_tank_gasoline_engine }
+}
+defined_text = {
+    name = OptGetSpecial1
+    text = { trigger = { check_variable = { opt_special_1_id = 3 } } localization_key = opt_key_tank_radio_3 }
+    text = { trigger = { check_variable = { opt_special_1_id = 2 } } localization_key = opt_key_tank_radio_2 }
+    text = { trigger = { check_variable = { opt_special_1_id = 1 } } localization_key = opt_key_tank_radio_1 }
+    text = { localization_key = opt_key_empty }
+}
+defined_text = {
+    name = OptGetSpecial2
+    text = { trigger = { check_variable = { opt_special_2_id = 5 } } localization_key = opt_key_extra_ammo_storage }
+    text = { trigger = { check_variable = { opt_special_2_id = 4 } } localization_key = opt_key_secondary_turret_hmg }
+    text = { trigger = { check_variable = { opt_special_2_id = 3 } } localization_key = opt_key_sloped_armor }
+    text = { trigger = { check_variable = { opt_special_2_id = 2 } } localization_key = opt_key_wet_ammo_storage }
+    text = { trigger = { check_variable = { opt_special_2_id = 1 } } localization_key = opt_key_easy_maintenance }
+    text = { localization_key = opt_key_empty }
+}
+defined_text = {
+    name = OptGetSpecial3
+    text = { trigger = { check_variable = { opt_special_3_id = 1 } } localization_key = opt_key_additional_machine_guns }
+    text = { localization_key = opt_key_empty }
+}
+defined_text = {
+    name = OptGetSpecial4
+    text = { trigger = { check_variable = { opt_special_4_id = 3 } } localization_key = opt_key_dozer_blade }
+    text = { trigger = { check_variable = { opt_special_4_id = 2 } } localization_key = opt_key_fuel_drum }
+    text = { trigger = { check_variable = { opt_special_4_id = 1 } } localization_key = opt_key_additional_machine_guns }
+    text = { localization_key = opt_key_empty }
+}
+
+defined_text = {
+    name = OptGetSPGChassis
+    text = { trigger = { check_variable = { opt_chassis_id = 3 } } localization_key = opt_key_medium_tank_artillery_chassis_3 }
+    text = { trigger = { check_variable = { opt_chassis_id = 2 } } localization_key = opt_key_medium_tank_artillery_chassis_2 }
+    text = { localization_key = opt_key_medium_tank_artillery_chassis_1 }
+}
